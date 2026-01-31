@@ -119,11 +119,6 @@ export default function Home() {
               <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
             </div>
 
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Features</a>
-              <a href="#how-it-works" className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Process</a>
-            </nav>
-
             <div className="flex items-center gap-3">
               <a
                 href="#"
@@ -143,9 +138,9 @@ export default function Home() {
 
         <main>
           <section className="max-w-6xl mx-auto px-6 py-24 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-lg bg-primary/10 border border-primary/30 rounded-full mb-6 shadow-lg shadow-primary/5">
+            <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
               <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Fraud Detection System</span>
+              <span className="text-sm font-semibold text-gray-900">Fraud Detection System</span>
             </div>
 
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
@@ -276,8 +271,8 @@ export default function Home() {
           </section>
         </main>
 
-        <footer className="border-t border-white/10 backdrop-blur-lg bg-black/60 py-8 mt-20">
-          <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-300">
+        <footer className="border-t border-white/10 backdrop-blur-lg bg-white/5 py-8 mt-20">
+          <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-200">
             <p>© 2024 PM-KUSUM Fraud Detection System. Government of India.</p>
           </div>
         </footer>
