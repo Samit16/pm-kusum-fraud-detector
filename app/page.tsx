@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import CSVUploader from '@/components/CSVUploader';
 import Dashboard from '@/components/Dashboard';
-import { Upload, FileCheck, AlertTriangle, ClipboardCheck, ArrowRight, Shield, X } from 'lucide-react';
+import { Upload, FileCheck, AlertTriangle, ClipboardCheck, ArrowRight, Shield, X, User, LogOut } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 
@@ -19,6 +19,8 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const supabase = createClient();
   const router = useRouter();
@@ -48,7 +50,7 @@ export default function Home() {
     const checkUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        setShowUpload(true);
+        setUser(user);
         syncUserProfile(user);
       }
     };
@@ -95,6 +97,7 @@ export default function Home() {
 
       if (data.user) {
         await syncUserProfile(data.user);
+        setUser(data.user);
       }
 
       // Login successful
@@ -123,6 +126,12 @@ export default function Home() {
     }
   };
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setShowUpload(false);
+    setShowProfileMenu(false);
+  };
 
   if (results) {
     return (
@@ -152,9 +161,9 @@ export default function Home() {
             </div>
             <button
               onClick={() => setShowUpload(false)}
-              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-white hover:text-gray-200 transition-colors"
             >
-              ← Back
+              ← Back to Home
             </button>
           </div>
         </header>
@@ -207,12 +216,43 @@ export default function Home() {
               >
                 Dashboard
               </a>
-              <button
-                onClick={() => setShowSignIn(true)}
-                className="px-5 py-2.5 text-sm font-medium glass-button text-gray-900 rounded-lg transition-all duration-300"
-              >
-                Sign In
-              </button>
+              {user ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowProfileMenu(!showProfileMenu)}
+                    className="p-2.5 glass-button rounded-full transition-all duration-300 flex items-center justify-center"
+                  >
+                    <User className="w-5 h-5 text-gray-900" />
+                  </button>
+                  {showProfileMenu && (
+                    <div className="absolute right-0 mt-2 w-48 glass-card rounded-xl shadow-lg overflow-hidden">
+                      <div className="p-3 border-b border-white/20">
+                        <p className="text-sm font-medium text-white truncate">{user.email}</p>
+                      </div>
+                      <button
+                        onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
+                        className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors"
+                      >
+                        Upload CSV
+                      </button>
+                      <button
+                        onClick={handleSignOut}
+                        className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors flex items-center gap-2"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowSignIn(true)}
+                  className="px-5 py-2.5 text-sm font-medium glass-button text-gray-900 rounded-lg transition-all duration-300"
+                >
+                  Sign In
+                </button>
+              )}
             </div>
           </div>
         </header>
