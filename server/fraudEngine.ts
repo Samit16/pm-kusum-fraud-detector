@@ -1,6 +1,6 @@
 
 export interface Application {
-    id: string; // generated or row index
+    id: string;
     name: string;
     application_date: string;
     aadhaar_last4?: string;
@@ -13,23 +13,23 @@ export interface Application {
 
 export interface FraudFlag {
     applicationId: string;
-    type: 'DUPLICATE_AADHAAR' | 'DUPLICATE_BANK' | 'DUPLICATE_PHONE' | 'GPS_CLUSTER' | 'NEW_BANK_ACCOUNT';
-    relatedTo?: string[]; // IDs of related applications
+    type: 'DUPLICATE_AADHAAR' | 'DUPLICATE_BANK' | 'DUPLICATE_PHONE' | 'GPS_CLUSTER' | 'NEW_BANK_ACCOUNT' | 'INSUFFICIENT_DATA';
+    relatedTo?: string[];
     confidence: number;
     description: string;
 }
 
-const CONFIDENCE_SCORES = {
+const BASE_CONFIDENCE = {
     DUPLICATE_AADHAAR: 95,
     DUPLICATE_BANK: 90,
     GPS_CLUSTER: 70,
     DUPLICATE_PHONE: 30,
     NEW_BANK_ACCOUNT: 40,
+    INSUFFICIENT_DATA: 100
 };
 
-// Haversine distance in km
 function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-    const R = 6371; // Earth radius in km
+    const R = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -41,12 +41,35 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): nu
 
 export function detectFraud(applications: Application[]): FraudFlag[] {
     const flags: FraudFlag[] = [];
-    const aadhaarMap = new Map<string, string[]>(); // value -> [appIds]
+    const aadhaarMap = new Map<string, string[]>();
     const bankMap = new Map<string, string[]>();
     const phoneMap = new Map<string, string[]>();
 
-    // 1. Group by identifiers
+    // Partial Data Map to track what's missing for weight adjustments
+    const missingFieldsMap = new Map<string, { noAadhaar: boolean, noGps: boolean, noBank: boolean }>();
+
     applications.forEach(app => {
+        let presentFields = 0;
+        if (app.aadhaar_last4) presentFields++;
+        if (app.bank_account) presentFields++;
+        if (app.phone) presentFields++;
+        if (app.gps_lat != null && app.gps_long != null) presentFields++;
+
+        const noAadhaar = !app.aadhaar_last4;
+        const noGps = app.gps_lat == null || app.gps_long == null;
+        const noBank = !app.bank_account;
+
+        missingFieldsMap.set(app.id, { noAadhaar, noGps, noBank });
+
+        if (presentFields < 2) {
+            flags.push({
+                applicationId: app.id,
+                type: 'INSUFFICIENT_DATA',
+                confidence: BASE_CONFIDENCE.INSUFFICIENT_DATA,
+                description: `Insufficient verifiable data. Only ${presentFields} fields present.`
+            });
+        }
+
         if (app.aadhaar_last4) {
             const existing = aadhaarMap.get(app.aadhaar_last4) || [];
             existing.push(app.id);
@@ -64,16 +87,21 @@ export function detectFraud(applications: Application[]): FraudFlag[] {
         }
     });
 
-    // 2. Generate flags for duplicates
     aadhaarMap.forEach((ids, aadhaar) => {
         if (ids.length >= 2) {
             ids.forEach(id => {
-                const related = ids.filter(i => i !== id);
+                const missing = missingFieldsMap.get(id);
+                // If GPS is missing, increase importance of Aadhaar duplicate
+                let score = BASE_CONFIDENCE.DUPLICATE_AADHAAR;
+                if (missing?.noGps) {
+                    score = Math.min(100, Math.round(score * 1.5)); // +50% weight if no GPS
+                }
+
                 flags.push({
                     applicationId: id,
                     type: 'DUPLICATE_AADHAAR',
-                    relatedTo: related,
-                    confidence: CONFIDENCE_SCORES.DUPLICATE_AADHAAR,
+                    relatedTo: ids.filter(i => i !== id),
+                    confidence: score,
                     description: `Aadhaar ${aadhaar} appears in ${ids.length} applications`
                 });
             });
@@ -83,12 +111,18 @@ export function detectFraud(applications: Application[]): FraudFlag[] {
     bankMap.forEach((ids, bank) => {
         if (ids.length >= 2) {
             ids.forEach(id => {
-                const related = ids.filter(i => i !== id);
+                const missing = missingFieldsMap.get(id);
+                // If Aadhaar is missing, increase importance of Bank duplicate
+                let score = BASE_CONFIDENCE.DUPLICATE_BANK;
+                if (missing?.noAadhaar) {
+                    score = Math.min(100, Math.round(score * 1.3));
+                }
+
                 flags.push({
                     applicationId: id,
                     type: 'DUPLICATE_BANK',
-                    relatedTo: related,
-                    confidence: CONFIDENCE_SCORES.DUPLICATE_BANK,
+                    relatedTo: ids.filter(i => i !== id),
+                    confidence: score,
                     description: `Bank Account ${bank} appears in ${ids.length} applications`
                 });
             });
@@ -98,27 +132,18 @@ export function detectFraud(applications: Application[]): FraudFlag[] {
     phoneMap.forEach((ids, phone) => {
         if (ids.length >= 3) {
             ids.forEach(id => {
-                const related = ids.filter(i => i !== id);
                 flags.push({
                     applicationId: id,
                     type: 'DUPLICATE_PHONE',
-                    relatedTo: related,
-                    confidence: CONFIDENCE_SCORES.DUPLICATE_PHONE,
+                    relatedTo: ids.filter(i => i !== id),
+                    confidence: BASE_CONFIDENCE.DUPLICATE_PHONE,
                     description: `Phone ${phone} appears in ${ids.length} applications`
                 });
             });
         }
     });
 
-    // 3. GPS Clustering
-    // Need to find groups of apps within 500m (0.5km)
-    // For O(N^2) with N=10000 might be slow (100M iterations).
-    // Optimization: Only compare if both have GPS.
-
     const appsWithGps = applications.filter(a => a.gps_lat != null && a.gps_long != null);
-
-    // To avoid huge output, we only flag if count >= 5
-    // We can just iterate and count neighbors for each node.
 
     for (let i = 0; i < appsWithGps.length; i++) {
         const appA = appsWithGps[i];
@@ -129,17 +154,23 @@ export function detectFraud(applications: Application[]): FraudFlag[] {
             const appB = appsWithGps[j];
 
             const dist = getDistance(appA.gps_lat!, appA.gps_long!, appB.gps_lat!, appB.gps_long!);
-            if (dist <= 0.5) { // 500 meters
+            if (dist <= 0.5) {
                 neighbors.push(appB.id);
             }
         }
 
-        if (neighbors.length + 1 >= 5) { // +1 for itself
+        if (neighbors.length + 1 >= 5) {
+            const missing = missingFieldsMap.get(appA.id);
+            let score = BASE_CONFIDENCE.GPS_CLUSTER;
+            if (missing?.noAadhaar) {
+                score = Math.min(100, Math.round(score * 1.5));
+            }
+
             flags.push({
                 applicationId: appA.id,
                 type: 'GPS_CLUSTER',
                 relatedTo: neighbors,
-                confidence: CONFIDENCE_SCORES.GPS_CLUSTER,
+                confidence: score,
                 description: `${neighbors.length + 1} applications within 500m radius`
             });
         }
