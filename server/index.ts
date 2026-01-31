@@ -1,7 +1,7 @@
 
 import express from 'express';
 import cors from 'cors';
-import { detectFraud, Application } from './fraudEngine';
+import { detectFraud, Application } from './fraudEngine.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
