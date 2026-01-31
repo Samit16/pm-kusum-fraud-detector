@@ -150,8 +150,10 @@ export default function Home() {
 
   if (showUpload) {
     return (
-      <div className="min-h-screen">
-        <header className="sticky top-0 z-50 glass-header">
+      <div className="min-h-screen relative">
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" />
+
+        <header className="sticky top-0 z-50 glass-header border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
@@ -161,35 +163,40 @@ export default function Home() {
             </div>
             <button
               onClick={() => setShowUpload(false)}
+<<<<<<< HEAD
               className="px-4 py-2 text-sm font-medium text-white hover:text-gray-200 transition-colors"
+=======
+              className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all"
+>>>>>>> 671fc93a3647ce1a64a1f31241479e1195f226b8
             >
               ← Back to Home
             </button>
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-6 py-12">
+        <main className="max-w-4xl mx-auto px-6 py-12 relative z-10">
           {loading ? (
-            <div className="flex flex-col items-center gap-6 py-20">
+            <div className="flex flex-col items-center gap-6 py-20 bg-black/20 backdrop-blur-md rounded-3xl border border-white/10 p-12">
               <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-              <p className="text-lg font-medium text-gray-600">Processing data...</p>
+              <p className="text-lg font-medium text-white">Processing data...</p>
             </div>
           ) : (
-            <>
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">Upload Data</h2>
-                <p className="text-gray-600">Submit CSV files for validation and fraud detection</p>
+            <div className="bg-black/20 backdrop-blur-md rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
+              <div className="mb-8 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 text-shadow-sm">Upload Data</h2>
+                <p className="text-gray-200 text-lg">Submit CSV files for validation and fraud detection</p>
               </div>
               <CSVUploader
                 onDataParsed={handleDataParsed}
                 onError={(err) => setError(err)}
               />
               {error && (
-                <div className="mt-4 p-4 bg-red-50/80 backdrop-blur-sm border border-red-200 rounded-xl">
-                  <p className="text-sm text-red-600">{error}</p>
+                <div className="mt-6 p-4 bg-red-500/20 backdrop-blur-sm border border-red-500/50 rounded-xl flex items-center gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-200" />
+                  <p className="text-sm text-red-100">{error}</p>
                 </div>
               )}
-            </>
+            </div>
           )}
         </main>
       </div>
