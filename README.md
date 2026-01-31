@@ -139,6 +139,9 @@ cp .env.example .env.local
 
 # Run development server
 npm run dev
+
+# Run backend server (for fraud detection API)
+npm run backend
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
