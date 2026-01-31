@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
-
 function normalizeData(rawData: any[]): Application[] {
     return rawData.map((row, index) => {
         const findValue = (keys: string[]) => {
@@ -21,7 +20,7 @@ function normalizeData(rawData: any[]): Application[] {
         };
 
         return {
-            id: String(index + 1).padStart(3, '0'), // Generate an ID like 001, 002 if not present
+            id: String(index + 1).padStart(3, '0'),
             name: findValue(['name', 'beneficiaryname', 'beneficiary_name']) || 'Unknown',
             application_date: findValue(['date', 'application_date', 'applicationdate']) || new Date().toISOString().split('T')[0],
             aadhaar_last4: findValue(['aadhaar', 'aadhaar_last_4', 'aadhaar(last4)', 'adharnumber']),
@@ -47,24 +46,18 @@ app.post('/api/analyze', (req, res) => {
         const applications = normalizeData(rawData);
         const flags = detectFraud(applications);
 
-        // Group flags by application ID for easier consumption by frontend
         const results = applications.map(app => {
             const appFlags = flags.filter(f => f.applicationId === app.id);
-
-            // Determine risk level
             let riskLevel = 'Low';
-            if (appFlags.length >= 2) riskLevel = 'High';
-            else if (appFlags.some(f => f.type === 'GPS_CLUSTER')) riskLevel = 'High'; // Single cluster flag is quite bad too? MVP says >=2 flags is Red, but let's stick to MVP rules.
-            else if (appFlags.length === 1) riskLevel = 'Medium';
-
-            // Override: Duplicate Aadhaar or Bank is Critical (Red) per MVP FR-4 table?
-            // MVP FR-4: Red >= 2 flags.
-            // Wait, FR-4 Table: "Duplicate Aadhaar | Critical". "Duplicate Bank | Critical".
-            // But Acceptance Criteria says: "Red (High Risk): >=2 flags triggered".
-            // Let's stick to criteria, but maybe add a tweak for criticals.
 
             if (appFlags.some(f => f.type === 'DUPLICATE_AADHAAR' || f.type === 'DUPLICATE_BANK')) {
                 riskLevel = 'High';
+            } else if (appFlags.some(f => f.type === 'GPS_CLUSTER')) {
+                riskLevel = 'High';
+            } else if (appFlags.length >= 2) {
+                riskLevel = 'High';
+            } else if (appFlags.length === 1) {
+                riskLevel = 'Medium';
             }
 
             return {
