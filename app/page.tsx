@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CSVUploader from '@/components/CSVUploader';
 import Dashboard from '@/components/Dashboard';
 import { Upload, FileCheck, AlertTriangle, ClipboardCheck, ArrowRight, Shield, X } from 'lucide-react';
+import { createClient } from '@/utils/supabase/client';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -12,6 +15,45 @@ export default function Home() {
   const [showUpload, setShowUpload] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  const supabase = createClient();
+  const router = useRouter();
+
+  const syncUserProfile = async (user: any) => {
+    if (!user) return;
+
+    try {
+      const { error } = await supabase.from('profiles').upsert({
+        id: user.id,
+        email: user.email,
+        full_name: user.user_metadata?.full_name,
+        avatar_url: user.user_metadata?.avatar_url,
+        last_sign_in_at: new Date().toISOString(),
+      });
+
+      if (error) {
+        // Silently fail if table doesn't exist, as this is an enhancement
+        console.warn('Error syncing user profile (table might not exist):', error);
+      }
+    } catch (err) {
+      console.error('Exception syncing user profile:', err);
+    }
+  };
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setShowUpload(true);
+        syncUserProfile(user);
+      }
+    };
+    checkUser();
+  }, [supabase.auth]);
 
   const handleDataParsed = async (data: any[]) => {
     setLoading(true);
@@ -38,10 +80,49 @@ export default function Home() {
     }
   };
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowSignIn(false);
+    setAuthLoading(true);
+    setAuthError(null);
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+
+      if (data.user) {
+        await syncUserProfile(data.user);
+      }
+
+      // Login successful
+      setShowSignIn(false);
+      setShowUpload(true); // Redirect to upload area or dashboard
+    } catch (err: any) {
+      setAuthError(err.message);
+    } finally {
+      setAuthLoading(false);
+    }
   };
+
+  const handleGoogleLogin = async () => {
+    setAuthLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${location.origin}/auth/callback`,
+        },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      setAuthError(err.message);
+      setAuthLoading(false);
+    }
+  };
+
 
   if (results) {
     return (
@@ -298,7 +379,13 @@ export default function Home() {
               <h2 className="text-2xl font-bold text-center text-white mb-2">Welcome back</h2>
               <p className="text-center text-gray-200 mb-8">Sign in to your account</p>
 
-              <form onSubmit={handleSignIn} className="space-y-5">
+              {authError && (
+                <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm text-center">
+                  {authError}
+                </div>
+              )}
+
+              <form onSubmit={handleEmailLogin} className="space-y-5">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
                     Email address
@@ -306,6 +393,8 @@ export default function Home() {
                   <input
                     id="email"
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
                     placeholder="you@example.com"
@@ -319,6 +408,8 @@ export default function Home() {
                   <input
                     id="password"
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
                     placeholder="••••••••"
@@ -342,9 +433,10 @@ export default function Home() {
 
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+                  disabled={authLoading}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  Sign in
+                  {authLoading ? 'Signing in...' : 'Sign in'}
                 </button>
               </form>
 
@@ -358,7 +450,15 @@ export default function Home() {
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3">
+<<<<<<< HEAD
                 <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-colors">
+=======
+                <button
+                  type="button"
+                  onClick={handleGoogleLogin}
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors"
+                >
+>>>>>>> refs/remotes/origin/main
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
