@@ -11,6 +11,8 @@
     "backend": "nodemon --watch server --exec ts-node --project server/tsconfig.json server/index.ts"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.93.3",
     "@tailwindcss/vite": "^4.1.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
