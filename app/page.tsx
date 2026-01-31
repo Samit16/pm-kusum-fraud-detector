@@ -60,14 +60,14 @@ export default function Home() {
 
   if (showUpload) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-        <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-gray-200/50">
+      <div className="min-h-screen">
+        <header className="sticky top-0 z-50 glass-header">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
                 <span className="text-white text-lg font-bold">PK</span>
               </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">PM-KUSUM</h1>
+              <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
             </div>
             <button
               onClick={() => setShowUpload(false)}
@@ -108,43 +108,36 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
-        <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-          <div className="wave-line top-[15%] opacity-70" style={{ animation: 'wave 8s ease-in-out infinite' }} />
-          <div className="wave-line top-[35%] opacity-60" style={{ animation: 'wave 10s ease-in-out infinite 1s' }} />
-          <div className="wave-line top-[55%] opacity-70" style={{ animation: 'wave-reverse 9s ease-in-out infinite 0.5s' }} />
-          <div className="wave-line top-[75%] opacity-60" style={{ animation: 'wave 11s ease-in-out infinite 1.5s' }} />
-        </div>
+      <div className="min-h-screen relative overflow-hidden">
 
-        <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-gray-200/50 shadow-sm">
-
+        <header className="sticky top-0 z-50 glass-header">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
                 <span className="text-white text-lg font-bold">PK</span>
               </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">PM-KUSUM</h1>
+              <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
             </div>
-            <nav className="hidden md:flex items-center gap-6">
-              <a href="#features" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Features
-              </a>
-              <a href="#how-it-works" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Process
+
+            <nav className="hidden md:flex items-center gap-8">
+              <a href="#features" className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Features</a>
+              <a href="#how-it-works" className="text-sm font-medium text-gray-300 hover:text-primary transition-colors">Process</a>
+            </nav>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="#"
+                className="hidden sm:block px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-primary to-emerald-600 text-white rounded-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+              >
+                Dashboard
               </a>
               <button
                 onClick={() => setShowSignIn(true)}
-                className="px-5 py-2.5 text-sm font-medium glass-button text-gray-700 rounded-lg transition-all duration-300"
+                className="px-5 py-2.5 text-sm font-medium glass-button text-gray-900 rounded-lg transition-all duration-300"
               >
                 Sign In
               </button>
-              <button
-                onClick={() => setShowUpload(true)}
-                className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-primary to-emerald-600 text-white rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105"
-              >
-                Dashboard
-              </button>
-            </nav>
+            </div>
           </div>
         </header>
 
@@ -155,11 +148,11 @@ export default function Home() {
               <span className="text-sm font-medium text-primary">Fraud Detection System</span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent mb-6 leading-tight">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               PM-KUSUM Verification
             </h2>
 
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10">
               Detect irregularities in solar subsidy applications through automated validation
             </p>
 
@@ -176,52 +169,70 @@ export default function Home() {
 
               <a
                 href="#features"
-                className="px-8 py-4 glass-button text-gray-700 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+                className="px-8 py-4 glass-button text-gray-900 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
               >
                 Learn More
               </a>
             </div>
           </section>
 
-          <section id="features" className="max-w-6xl mx-auto px-6 py-16">
-            <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">Core Capabilities</h3>
+          <section id="features" className="max-w-6xl mx-auto px-6 py-20">
+            <div className="text-center mb-16">
+              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">Core Capabilities</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto">Comprehensive tools for fraud detection and data validation</p>
+            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="group p-6 glass-card rounded-2xl hover:bg-white/85 transition-all duration-300 hover:-translate-y-2">
-                <div className="w-12 h-12 backdrop-blur-md bg-gradient-to-br from-primary/20 to-emerald-600/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                  <Upload className="w-6 h-6 text-primary" />
+              <div className="group p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+                <div className="relative">
+                  <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
+                    <Upload className="w-6 h-6 text-primary" />
+                  </div>
+                  <h4 className="font-bold text-lg text-white mb-2">Data Upload</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed">Submit beneficiary data via CSV</p>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Data Upload</h4>
-                <p className="text-sm text-gray-600">Submit beneficiary data via CSV</p>
               </div>
 
-              <div className="group p-6 glass-card rounded-2xl hover:bg-white/85 transition-all duration-300 hover:-translate-y-2">
-                <div className="w-12 h-12 backdrop-blur-md bg-gradient-to-br from-primary/20 to-emerald-600/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                  <FileCheck className="w-6 h-6 text-primary" />
+              <div className="group p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+                <div className="relative">
+                  <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
+                    <FileCheck className="w-6 h-6 text-primary" />
+                  </div>
+                  <h4 className="font-bold text-lg text-white mb-2">Validation</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed">Rule-based integrity checks</p>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Validation</h4>
-                <p className="text-sm text-gray-600">Rule-based integrity checks</p>
               </div>
 
-              <div className="group p-6 glass-card rounded-2xl hover:bg-white/85 transition-all duration-300 hover:-translate-y-2">
-                <div className="w-12 h-12 backdrop-blur-md bg-gradient-to-br from-primary/20 to-emerald-600/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                  <AlertTriangle className="w-6 h-6 text-primary" />
+              <div className="group p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+                <div className="relative">
+                  <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
+                    <AlertTriangle className="w-6 h-6 text-primary" />
+                  </div>
+                  <h4 className="font-bold text-lg text-white mb-2">Flagging</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed">Identify suspect entries</p>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Flagging</h4>
-                <p className="text-sm text-gray-600">Identify suspect entries</p>
               </div>
 
-              <div className="group p-6 glass-card rounded-2xl hover:bg-white/85 transition-all duration-300 hover:-translate-y-2">
-                <div className="w-12 h-12 backdrop-blur-md bg-gradient-to-br from-primary/20 to-emerald-600/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                  <ClipboardCheck className="w-6 h-6 text-primary" />
+              <div className="group p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+                <div className="relative">
+                  <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
+                    <ClipboardCheck className="w-6 h-6 text-primary" />
+                  </div>
+                  <h4 className="font-bold text-lg text-white mb-2">Reports</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed">Export audit summaries</p>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Reports</h4>
-                <p className="text-sm text-gray-600">Export audit summaries</p>
               </div>
             </div>
           </section>
 
-          <section id="how-it-works" className="max-w-4xl mx-auto px-6 py-16">
-            <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">How It Works</h3>
+          <section id="how-it-works" className="max-w-5xl mx-auto px-6 py-20">
+            <div className="text-center mb-16">
+              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">How It Works</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto">Simple four-step process from data submission to final review</p>
+            </div>
             <div className="space-y-6">
               {[
                 { num: 1, title: 'Upload', desc: 'Submit CSV with beneficiary data' },
@@ -229,13 +240,14 @@ export default function Home() {
                 { num: 3, title: 'Flag', desc: 'Irregularities are categorized' },
                 { num: 4, title: 'Review', desc: 'Examine results and export reports' }
               ].map((step) => (
-                <div key={step.num} className="flex items-center gap-6 p-6 glass-card rounded-2xl hover:bg-white/85 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-emerald-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-lg shadow-primary/20">
+                <div key={step.num} className="group flex items-center gap-8 p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-emerald-600 text-white rounded-2xl flex items-center justify-center font-bold text-2xl shadow-xl shadow-primary/30 group-hover:scale-110 transition-transform">
                     {step.num}
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{step.title}</h4>
-                    <p className="text-sm text-gray-600">{step.desc}</p>
+                  <div className="relative">
+                    <h4 className="font-bold text-xl text-white mb-2">{step.title}</h4>
+                    <p className="text-gray-300 leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -246,18 +258,15 @@ export default function Home() {
             <div className="p-12 glass rounded-3xl relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl pointer-events-none" />
               <div className="relative z-10">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">Ready to Begin?</h3>
-                <p className="text-gray-600 mb-8">Start validating beneficiary data now</p>
+                <h3 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">Ready to Begin?</h3>
+                <p className="text-gray-200 mb-8">Start validating beneficiary data now</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button
-                    onClick={() => setShowUpload(true)}
-                    className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
-                  >
+                  <button className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
                     Open Dashboard
                   </button>
                   <button
                     onClick={() => setShowUpload(true)}
-                    className="px-8 py-4 glass-button text-gray-700 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+                    className="px-8 py-4 glass-button text-gray-900 rounded-xl font-semibold transition-all duration-300 hover:scale-105" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
                   >
                     Upload Data
                   </button>
@@ -267,23 +276,22 @@ export default function Home() {
           </section>
         </main>
 
-        <footer className="backdrop-blur-md bg-white/70 border-t border-gray-200/50 py-6 mt-12">
-          <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-600">
-            PM-KUSUM Fraud Detection · Government of India
+        <footer className="border-t border-white/10 backdrop-blur-lg bg-black/60 py-8 mt-20">
+          <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-300">
+            <p>© 2024 PM-KUSUM Fraud Detection System. Government of India.</p>
           </div>
         </footer>
       </div>
 
       {showSignIn && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="relative w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-            <div className="bg-white border border-gray-200 rounded-3xl shadow-2xl p-8">
-
+            <div className="bg-white rounded-3xl p-8 shadow-2xl relative">
               <button
                 onClick={() => setShowSignIn(false)}
-                className="absolute top-6 right-6 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute top-4 right-4 p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6 text-gray-700" />
               </button>
 
               <div className="flex justify-center mb-6">
@@ -292,30 +300,33 @@ export default function Home() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">Sign in to your account</h2>
+              <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">Welcome back</h2>
+              <p className="text-center text-gray-600 mb-8">Sign in to your account</p>
 
               <form onSubmit={handleSignIn} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email address
                   </label>
                   <input
+                    id="email"
                     type="email"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-                    placeholder="Enter your email"
                     required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                    placeholder="you@example.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                     Password
                   </label>
                   <input
+                    id="password"
                     type="password"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-                    placeholder="Enter your password"
                     required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                    placeholder="••••••••"
                   />
                 </div>
 
@@ -327,7 +338,7 @@ export default function Home() {
                       onChange={(e) => setRememberMe(e.target.checked)}
                       className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/50"
                     />
-                    <span className="text-sm text-gray-700">Remember me</span>
+                    <span className="text-sm text-gray-600">Remember me</span>
                   </label>
                   <a href="#" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                     Forgot password?
@@ -336,22 +347,22 @@ export default function Home() {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-gradient-to-r from-primary to-emerald-600 text-white font-semibold rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
                 >
                   Sign in
                 </button>
               </form>
 
-              <div className="relative my-6">
+              <div className="mt-6 relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200"></div>
+                  <div className="w-full border-t border-gray-200" />
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-4 bg-white text-gray-500">Or continue with</span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="mt-6 grid grid-cols-2 gap-3">
                 <button className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors">
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -361,7 +372,6 @@ export default function Home() {
                   </svg>
                   <span className="text-sm font-medium text-gray-700">Google</span>
                 </button>
-
                 <button className="flex items-center justify-center gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />

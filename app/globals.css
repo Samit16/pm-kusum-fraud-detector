@@ -100,37 +100,65 @@
   body {
     @apply bg-background text-foreground font-sans;
     background-image:
-      linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
-    background-size: 80px 80px;
-    background-position: -1px -1px;
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 }
 
 .glass {
-  @apply backdrop-blur-xl bg-white/80 border border-white/60 shadow-lg;
+  @apply backdrop-blur-2xl bg-white/40 border-2 border-white/50 shadow-2xl;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(16, 185, 129, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(16, 185, 129, 0.1);
 }
 
 .glass-card {
-  @apply backdrop-blur-md bg-white/70 border border-white/50 shadow-xl;
+  @apply backdrop-blur-xl bg-white/30 border border-white/40 shadow-xl;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(16, 185, 129, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(16, 185, 129, 0.1);
+}
+
+.glass-card:hover {
+  @apply bg-white/40 border-white/50;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    0 4px 12px rgba(16, 185, 129, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(16, 185, 129, 0.15);
 }
 
 .glass-button {
-  @apply backdrop-blur-lg bg-white/60 border border-white/80 shadow-md;
+  @apply backdrop-blur-md bg-white/80 border border-white/90 shadow-md;
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(16, 185, 129, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .glass-button:hover {
-  @apply bg-white/80 shadow-lg;
+  @apply bg-white/90 border-white shadow-lg;
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    0 4px 8px rgba(16, 185, 129, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+.glass-header {
+  @apply backdrop-blur-lg bg-black/60 border-b border-white/10;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(16, 185, 129, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 @keyframes wave {
