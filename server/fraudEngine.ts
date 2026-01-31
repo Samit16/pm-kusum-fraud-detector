@@ -45,7 +45,6 @@ export function detectFraud(applications: Application[]): FraudFlag[] {
     const bankMap = new Map<string, string[]>();
     const phoneMap = new Map<string, string[]>();
 
-    // Partial Data Map to track what's missing for weight adjustments
     const missingFieldsMap = new Map<string, { noAadhaar: boolean, noGps: boolean, noBank: boolean }>();
 
     applications.forEach(app => {
