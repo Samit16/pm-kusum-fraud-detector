@@ -5,7 +5,7 @@
 
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
 ![Track](https://img.shields.io/badge/track-DPI--2-blue)
-![Tech](https://img.shields.io/badge/tech-Next.js%20%2B%20Firebase-green)
+![Tech](https://img.shields.io/badge/tech-Next.js%20%2B%20)
 
 ---
 
@@ -62,8 +62,6 @@ Styling:              Tailwind CSS + shadcn/ui
 CSV Parsing:          PapaParse
 Charts:               Recharts
 Maps:                 Leaflet.js + React-Leaflet
-Database:             Supabase (PostgreSQL)
-Authentication:       Supabase Auth
 Deployment:           Vercel
 ```
 
@@ -229,30 +227,13 @@ npm run demo:fraud-mix     # 30% frauds seeded
 
 ---
 
-## 🔮 Future Roadmap
-
-### Post-Hackathon (Phase 2)
-- [ ] DigiLocker integration for automatic land document verification
-- [ ] ML model for predictive fraud scoring
-- [ ] Mobile app for field officers (geotagged photo uploads)
-- [ ] SMS alerts to applicants when flagged
-- [ ] Integration with state electricity board databases
-
-### Production Deployment (Phase 3)
-- [ ] Multi-state rollout (Karnataka, Rajasthan, Gujarat)
-- [ ] MNRE dashboard integration
-- [ ] Blockchain audit trail for subsidy approvals
-- [ ] Real-time DISCOM API integration
-
----
-
 ## 👥 Team
 
-- **[Your Name]** - Frontend Lead
-- **[Teammate 1]** - Data Logic & Algorithms
-- **[Teammate 2]** - UI/UX Design
+- **[Samit Bhisikar]** - Backend Lead
+- **[Malhar Kalmegh]** - Pitch and presentation
+- **[Krishanu Chatterjee]** - UI/UX design
 
-**Mentor/Guide**: [If applicable]
+**Mentor/Guide**: [Kajal Badlani]
 
 ---
 
