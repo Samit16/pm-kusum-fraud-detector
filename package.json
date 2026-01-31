@@ -1,6 +1,7 @@
 {
   "name": "pm-kusum-fraud-detector",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -52,7 +53,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/Samit16/pm-kusum-fraud-detector/issues"
   },
