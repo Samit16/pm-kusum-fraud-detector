@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import Papa from 'papaparse';
+import { UploadCloud } from 'lucide-react';
 
 interface CSVUploaderProps {
     onDataParsed: (data: any[]) => void;
@@ -59,7 +60,9 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
             onDrop={onDrop}
             onDragOver={onDragOver}
             onDragLeave={onDragLeave}
-            className={`border-2 border-dashed rounded-lg p-10 text-center transition-colors cursor-pointer ${isDragOver ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+            className={`border-2 border-dashed rounded-2xl p-16 text-center transition-all duration-300 cursor-pointer group ${isDragOver
+                    ? 'border-primary bg-primary/10 scale-[1.02]'
+                    : 'border-white/20 bg-white/5 hover:border-primary/50 hover:bg-white/10'
                 }`}
         >
             <input
@@ -69,14 +72,26 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
                 id="csvValidation"
                 onChange={(e) => e.target.files && handleFile(e.target.files[0])}
             />
-            <label htmlFor="csvValidation" className="cursor-pointer w-full h-full block">
+            <label htmlFor="csvValidation" className="cursor-pointer w-full h-full flex flex-col items-center justify-center gap-4">
                 {parsing ? (
-                    <p className="text-gray-600">Parsing CSV...</p>
-                ) : (
-                    <div>
-                        <p className="text-lg font-medium text-gray-700">Drag & Drop CSV here</p>
-                        <p className="text-sm text-gray-500 mt-2">or click to browse</p>
+                    <div className="flex flex-col items-center gap-3">
+                        <div className="w-8 h-8 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+                        <p className="text-white/80 font-medium">Parsing CSV...</p>
                     </div>
+                ) : (
+                    <>
+                        <div className={`p-4 rounded-full transition-all duration-300 ${isDragOver ? 'bg-primary/20 text-primary' : 'bg-white/10 text-white/70 group-hover:bg-primary/10 group-hover:text-primary group-hover:scale-110'}`}>
+                            <UploadCloud className="w-10 h-10" />
+                        </div>
+                        <div>
+                            <p className="text-xl font-semibold text-white mb-2">
+                                Drag & Drop CSV here
+                            </p>
+                            <p className="text-white/50 group-hover:text-white/70 transition-colors">
+                                or click to browse files
+                            </p>
+                        </div>
+                    </>
                 )}
             </label>
         </div>
