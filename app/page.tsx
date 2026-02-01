@@ -332,12 +332,13 @@ export default function Home() {
                 */}
                 <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[130px] rounded-full -z-10 animate-pulse" />
-                  <div className="relative w-full h-full animate-float">
+                  <div className="relative w-full h-full animate-float overflow-hidden">
                     <Image
                       src="/images/mascot_transparent.png"
                       alt="Solar Suraksha Official Mascot"
                       fill
-                      className="object-contain drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
+                      className="object-contain drop-shadow-[0_20px_40px_rgba(16,185,129,0.25)] scale-125 translate-y-[10%]"
+                      style={{ clipPath: 'inset(18% 0 0 0)' }}
                       priority
                     />
                   </div>
