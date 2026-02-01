@@ -1,11 +1,10 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "noEmit": false,
-        "outDir": "dist",
-        "isolatedModules": false
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "target": "ES2022",
+        "outDir": "dist"
     },
     "include": [
         "./**/*.ts"

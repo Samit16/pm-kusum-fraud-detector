@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import CSVUploader from '@/components/CSVUploader';
 import Dashboard from '@/components/Dashboard';
 import { Upload, FileCheck, AlertTriangle, ClipboardCheck, ArrowRight, Shield, X, User, LogOut } from 'lucide-react';
@@ -11,6 +12,7 @@ import { useRouter } from 'next/navigation';
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<any>(null);
+  const [processingTime, setProcessingTime] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
@@ -60,6 +62,7 @@ export default function Home() {
   const handleDataParsed = async (data: any[]) => {
     setLoading(true);
     setError(null);
+    const startTime = performance.now();
     try {
       const response = await fetch('http://localhost:3001/api/analyze', {
         method: 'POST',
@@ -74,6 +77,8 @@ export default function Home() {
       }
 
       const result = await response.json();
+      const endTime = performance.now();
+      setProcessingTime(Math.round(endTime - startTime));
       setResults(result);
     } catch (err: any) {
       setError(err.message || 'An error occurred during analysis');
@@ -126,6 +131,11 @@ export default function Home() {
     }
   };
 
+  // Placeholder for future auth integration
+  const handleAuthAction = (action: string) => {
+    console.log(`[Auth] ${action} triggered`);
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -139,8 +149,10 @@ export default function Home() {
         <Dashboard
           summary={results.summary}
           results={results.results}
+          processingTime={processingTime}
           onReset={() => {
             setResults(null);
+            setProcessingTime(null);
             setShowUpload(false);
           }}
         />
@@ -153,17 +165,26 @@ export default function Home() {
       <div className="min-h-screen relative">
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" />
 
-        <header className="sticky top-0 z-50 glass-header border-b border-white/10">
+        <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-md shadow-sm">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white text-lg font-bold">PK</span>
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-200 shadow-sm bg-white">
+                <Image
+                  src="/images/logo.png"
+                  alt="SolarSuraksha Logo"
+                  fill
+                  className="object-cover p-1"
+                />
               </div>
-              <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
+              <h1 className="text-xl font-bold text-gray-900 tracking-tight">SolarSuraksha</h1>
             </div>
             <button
               onClick={() => setShowUpload(false)}
+<<<<<<< HEAD
               className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all"
+=======
+              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
+>>>>>>> 1cf22dc3504db99d1fcf1bc001dd65d376856814
             >
               ← Back to Home
             </button>
@@ -172,24 +193,24 @@ export default function Home() {
 
         <main className="max-w-4xl mx-auto px-6 py-12 relative z-10">
           {loading ? (
-            <div className="flex flex-col items-center gap-6 py-20 bg-black/20 backdrop-blur-md rounded-3xl border border-white/10 p-12">
+            <div className="flex flex-col items-center gap-6 py-20 bg-white/90 backdrop-blur-md rounded-3xl border border-gray-200 p-12 shadow-xl">
               <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-              <p className="text-lg font-medium text-white">Processing data...</p>
+              <p className="text-lg font-medium text-gray-900">Processing data...</p>
             </div>
           ) : (
-            <div className="bg-black/20 backdrop-blur-md rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
+            <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-gray-200 p-8 md:p-12 shadow-2xl">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 text-shadow-sm">Upload Data</h2>
-                <p className="text-gray-200 text-lg">Submit CSV files for validation and fraud detection</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Upload Data</h2>
+                <p className="text-gray-600 text-lg">Submit CSV files for verification</p>
               </div>
               <CSVUploader
                 onDataParsed={handleDataParsed}
                 onError={(err) => setError(err)}
               />
               {error && (
-                <div className="mt-6 p-4 bg-red-500/20 backdrop-blur-sm border border-red-500/50 rounded-xl flex items-center gap-3">
-                  <AlertTriangle className="w-5 h-5 text-red-200" />
-                  <p className="text-sm text-red-100">{error}</p>
+                <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3">
+                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                  <p className="text-sm text-red-700">{error}</p>
                 </div>
               )}
             </div>
@@ -203,22 +224,28 @@ export default function Home() {
     <>
       <div className="min-h-screen relative overflow-hidden">
 
-        <header className="fixed top-0 left-0 right-0 z-50 glass-header">
+        <header className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-md shadow-sm">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white text-lg font-bold">PK</span>
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-200 shadow-sm bg-white">
+                <Image
+                  src="/images/logo.png"
+                  alt="SolarSuraksha Logo"
+                  fill
+                  className="object-cover p-1"
+                  priority
+                />
               </div>
-              <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
+              <h1 className="text-xl font-bold text-gray-900 tracking-tight">SolarSuraksha</h1>
             </div>
 
             <div className="flex items-center gap-3">
-              <a
-                href="#"
+              <button
+                onClick={() => setShowUpload(true)}
                 className="hidden sm:block px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-primary to-emerald-600 text-white rounded-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
               >
                 Dashboard
-              </a>
+              </button>
               {user ? (
                 <div className="relative">
                   <button
@@ -228,24 +255,30 @@ export default function Home() {
                     <User className="w-5 h-5 text-gray-900" />
                   </button>
                   {showProfileMenu && (
-                    <div className="absolute right-0 mt-2 w-48 glass-card rounded-xl shadow-lg overflow-hidden">
-                      <div className="p-3 border-b border-white/20">
-                        <p className="text-sm font-medium text-white truncate">{user.email}</p>
+                    <>
+                      <div
+                        className="fixed inset-0 z-0"
+                        onClick={() => setShowProfileMenu(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden z-10">
+                        <div className="p-3 border-b border-gray-100 bg-gray-50">
+                          <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
+                        </div>
+                        <button
+                          onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                        >
+                          Upload CSV
+                        </button>
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          Sign Out
+                        </button>
                       </div>
-                      <button
-                        onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
-                        className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors"
-                      >
-                        Upload CSV
-                      </button>
-                      <button
-                        onClick={handleSignOut}
-                        className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors flex items-center gap-2"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Sign Out
-                      </button>
-                    </div>
+                    </>
                   )}
                 </div>
               ) : (
@@ -262,43 +295,48 @@ export default function Home() {
 
         <main>
           <section className="max-w-6xl mx-auto px-6 py-24 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
-              <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-gray-900">Fraud Detection System</span>
+            <div className="flex justify-center mb-8">
+              <div className="relative w-40 h-40 animate-in zoom-in duration-700 drop-shadow-2xl rounded-full overflow-hidden">
+                <Image
+                  src="/images/logo.png"
+                  alt="SolarSuraksha Hero Logo"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
 
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-              PM-KUSUM Verification
+            <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
+              <Shield className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
+            </div>
+
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg text-balance">
+              PM-KUSUM Beneficiary Audit System
             </h2>
 
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10">
-              Detect irregularities in solar subsidy applications through automated validation
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+              Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => setShowUpload(true)}
-                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
+                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 <span className="flex items-center gap-2">
-                  Get Started
+                  Upload Applications for Screening
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
-
-              <a
-                href="#features"
-                className="px-8 py-4 glass-button text-gray-900 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
-              >
-                Learn More
-              </a>
             </div>
           </section>
 
           <section id="features" className="max-w-6xl mx-auto px-6 py-20 pt-32">
             <div className="text-center mb-16">
-              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">Core Capabilities</h3>
-              <p className="text-gray-200 max-w-2xl mx-auto">Comprehensive tools for fraud detection and data validation</p>
+              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg font-display tracking-tight text-balance">System Audit Framework</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto font-medium">Official protocols for fraud identification and application vetting</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="group p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
@@ -307,8 +345,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <Upload className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Data Upload</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Submit beneficiary data via CSV</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Batch Intake</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Ingest massive beneficiary datasets for concurrent processing</p>
                 </div>
               </div>
 
@@ -318,8 +356,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <FileCheck className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Validation</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Rule-based integrity checks</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Heuristic Screening</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Execute rule-based integrity checks across field datasets</p>
                 </div>
               </div>
 
@@ -329,8 +367,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <AlertTriangle className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Flagging</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Identify suspect entries</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Pattern Isolation</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Identify suspect clusters and anomalous behavioral patterns</p>
                 </div>
               </div>
 
@@ -340,8 +378,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <ClipboardCheck className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Reports</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Export audit summaries</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Official Dossier</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Generate compliance-ready audit reports for field officers</p>
                 </div>
               </div>
             </div>
@@ -349,15 +387,15 @@ export default function Home() {
 
           <section id="how-it-works" className="max-w-5xl mx-auto px-6 py-20">
             <div className="text-center mb-16">
-              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">How It Works</h3>
-              <p className="text-gray-200 max-w-2xl mx-auto">Simple four-step process from data submission to final review</p>
+              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg font-display tracking-tight">Audit Lifecycle</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed">Four-stage automated screening process for application vetting</p>
             </div>
             <div className="space-y-6">
               {[
-                { num: 1, title: 'Upload', desc: 'Submit CSV with beneficiary data' },
-                { num: 2, title: 'Validate', desc: 'System runs integrity checks' },
-                { num: 3, title: 'Flag', desc: 'Irregularities are categorized' },
-                { num: 4, title: 'Review', desc: 'Examine results and export reports' }
+                { num: 1, title: 'Secure Data Ingestion', desc: 'Encrypted transfer of beneficiary datasets (CSV/Batch)' },
+                { num: 2, title: 'Core Validation', desc: 'System executes heuristic and cross-reference checks' },
+                { num: 3, title: 'Risk Stratification', desc: 'Anomalies are classified by advisory risk levels' },
+                { num: 4, title: 'Advisory Review', desc: 'Final audit report generation for field validation' }
               ].map((step) => (
                 <div key={step.num} className="group flex items-center gap-8 p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -378,16 +416,13 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl pointer-events-none" />
               <div className="relative z-10">
                 <h3 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">Ready to Begin?</h3>
-                <p className="text-gray-200 mb-8">Start validating beneficiary data now</p>
+                <p className="text-gray-200 mb-8 font-medium">Commence automated application screening and audit verification</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
-                    Open Dashboard
-                  </button>
                   <button
                     onClick={() => setShowUpload(true)}
-                    className="px-8 py-4 glass-button text-gray-900 rounded-xl font-semibold transition-all duration-300 hover:scale-105" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
+                    className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105"
                   >
-                    Upload Data
+                    Access Audit Dashboard
                   </button>
                 </div>
               </div>
@@ -395,32 +430,114 @@ export default function Home() {
           </section>
         </main>
 
-        <footer className="border-t border-white/10 glass-header py-8 mt-20">
-          <div className="max-w-7xl mx-auto px-6 text-center text-sm text-white">
-            <p>© 2024 PM-KUSUM Fraud Detection System. Government of India.</p>
+        <footer className="relative mt-20 border-t border-gray-200 bg-white/95 backdrop-blur-md pt-16 pb-8">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-200 bg-white shadow-sm">
+                    <Image
+                      src="/images/logo.png"
+                      alt="SolarSuraksha Logo"
+                      fill
+                      className="object-cover p-1"
+                    />
+                  </div>
+                  <span className="text-xl font-bold text-gray-900 tracking-tight">SolarSuraksha</span>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Advanced automated audit system for PM-KUSUM verification. Ensuring transparency and integrity in solar energy distribution.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-gray-900 mb-6 uppercase tracking-wider text-xs">Resources</h4>
+                <ul className="space-y-4">
+                  {['Documentation', 'API Reference', 'User Guide', 'Status Dashboard'].map((item) => (
+                    <li key={item}>
+                      <a href="#" className="text-sm text-gray-600 hover:text-primary transition-colors">{item}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-gray-900 mb-6 uppercase tracking-wider text-xs">Support</h4>
+                <ul className="space-y-4">
+                  {['Help Center', 'Technical Support', 'Community Forum', 'Contact Us'].map((item) => (
+                    <li key={item}>
+                      <a href="#" className="text-sm text-gray-600 hover:text-primary transition-colors">{item}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-gray-900 mb-6 uppercase tracking-wider text-xs">Contact</h4>
+                <ul className="space-y-4">
+                  <li className="text-sm text-gray-600">
+                    <span className="block font-medium text-gray-900 mb-1">Email</span>
+                    support@solarsuraksha.gov.in
+                  </li>
+                  <li className="text-sm text-gray-600">
+                    <span className="block font-medium text-gray-900 mb-1">Office</span>
+                    Shastri Bhawan, New Delhi, India
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex gap-8">
+                {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((link) => (
+                  <a
+                    key={link}
+                    href="#"
+                    className="text-xs font-medium text-gray-500 hover:text-gray-900 transition-colors"
+                  >
+                    {link}
+                  </a>
+                ))}
+              </div>
+
+              <div className="text-xs font-medium text-gray-500">
+                © {new Date().getFullYear()} Ministry of New and Renewable Energy.
+              </div>
+            </div>
           </div>
         </footer>
+
+        <style jsx global>{`
+          html {
+            scroll-behavior: smooth;
+          }
+        `}</style>
       </div>
 
       {showSignIn && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
           <div className="relative w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-            <div className="glass-card rounded-3xl p-8 shadow-2xl relative">
+            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl relative border border-gray-100">
               <button
                 onClick={() => setShowSignIn(false)}
-                className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
+                className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all"
               >
-                <X className="w-6 h-6 text-white" />
+                <X className="w-5 h-5" />
               </button>
 
               <div className="flex justify-center mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-primary to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30">
-                  <span className="text-white text-2xl font-bold">PK</span>
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white">
+                  <Image
+                    src="/images/logo.png"
+                    alt="SolarSuraksha Logo"
+                    fill
+                    className="object-cover p-1"
+                  />
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-center text-white mb-2">Welcome back</h2>
-              <p className="text-center text-gray-200 mb-8">Sign in to your account</p>
+              <h2 className="text-3xl font-bold text-center text-gray-900 mb-2 tracking-tight">Login</h2>
+              <p className="text-center text-gray-500 mb-10 text-sm">Secure access to verification portal</p>
 
               {authError && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm text-center">
@@ -430,7 +547,7 @@ export default function Home() {
 
               <form onSubmit={handleEmailLogin} className="space-y-5">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                     Email address
                   </label>
                   <input
@@ -439,13 +556,13 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                    className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
                     placeholder="you@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
                     Password
                   </label>
                   <input
@@ -454,49 +571,53 @@ export default function Home() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                    className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
                     placeholder="••••••••"
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <label className="flex items-center gap-2 cursor-pointer">
+                  <label className="flex items-center gap-2 cursor-pointer group">
                     <input
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
-                      className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/50"
+                      className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/40"
                     />
-                    <span className="text-sm text-gray-200">Remember me</span>
+                    <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">Stay signed in</span>
                   </label>
-                  <a href="#" className="text-sm font-medium text-white hover:text-gray-200 transition-colors">
-                    Forgot password?
+                  <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); handleAuthAction('Password Recovery'); }}
+                    className="text-sm font-semibold text-primary hover:text-emerald-700 transition-colors"
+                  >
+                    Reset Password
                   </a>
                 </div>
 
                 <button
                   type="submit"
                   disabled={authLoading}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-2xl font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-2"
                 >
-                  {authLoading ? 'Signing in...' : 'Sign in'}
+                  {authLoading ? 'Authenticating...' : 'Sign In'}
                 </button>
               </form>
 
-              <div className="mt-6 relative">
+              <div className="mt-8 relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-white/20" />
+                  <div className="w-full border-t border-gray-100" />
                 </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-transparent text-gray-200">Or continue with</span>
+                <div className="relative flex justify-center text-xs">
+                  <span className="px-4 bg-white text-gray-400 font-bold uppercase tracking-widest">Standard login</span>
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="mt-8 flex flex-col items-center gap-6">
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-colors"
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm active:scale-[0.98]"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -504,22 +625,13 @@ export default function Home() {
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                   </svg>
-                  <span className="text-sm font-medium text-white">Google</span>
+                  <span className="text-sm font-bold text-gray-700">Google</span>
                 </button>
-                <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-colors">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-sm font-medium text-white">GitHub</span>
-                </button>
-              </div>
 
-              <p className="mt-6 text-center text-sm text-gray-200">
-                Not a member?{' '}
-                <a href="#" className="font-medium text-primary hover:text-primary/80 transition-colors">
-                  Start a 14 day free trial
-                </a>
-              </p>
+                <p className="text-sm text-gray-500">
+                  New administrator? <a href="#" className="font-bold text-primary hover:text-emerald-700 transition-colors uppercase tracking-tight">Request Access</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>

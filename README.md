@@ -54,6 +54,16 @@ An intelligent CSV-based fraud detection dashboard that flags suspicious applica
 
 ---
 
+### AI Features implemented
+
+- **CSV Files page**
+- **Logo Creation**
+- **GlassMorphism Design**
+- **Micro Animations and scroll effects**
+- **Mascot Creation**
+- **SEO features and data**
+---
+
 ## 🏗️ Tech Stack
 
 ```

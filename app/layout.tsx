@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PM-KUSUM Fraud Detection | Admin Portal",
-  description: "Government portal for PM-KUSUM beneficiary fraud detection and analysis",
+  title: "SolarSuraksha | Admin Portal",
+  description: "Government portal for SolarSuraksha beneficiary fraud detection and analysis",
 };
 
 export default function RootLayout({
@@ -19,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
+      <body className={`${inter.variable} antialiased`}>
         {children}
       </body>
     </html>
