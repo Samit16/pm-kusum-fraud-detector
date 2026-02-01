@@ -326,7 +326,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative flex justify-center lg:justify-end animate-in slide-in-from-right zoom-in duration-1000">
+              <div className="relative flex justify-center lg:justify-end">
                 {/* 
                    Transparent mascot floating naturally on the background 
                 */}
