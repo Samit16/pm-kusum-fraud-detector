@@ -291,6 +291,18 @@ export default function Home() {
 
         <main>
           <section className="max-w-6xl mx-auto px-6 py-24 text-center">
+            <div className="flex justify-center mb-8">
+              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl shadow-black/20 bg-white animate-in zoom-in duration-700">
+                <Image
+                  src="/images/logo.png"
+                  alt="SolarSuraksha Hero Logo"
+                  fill
+                  className="object-cover p-2"
+                  priority
+                />
+              </div>
+            </div>
+
             <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
               <Shield className="w-4 h-4 text-primary" />
               <span className="text-sm font-semibold text-gray-900">Fraud Detection System</span>
