@@ -110,7 +110,7 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
             onDragLeave={onDragLeave}
             className={`border-2 border-dashed rounded-2xl p-16 text-center transition-all duration-300 cursor-pointer group ${isDragOver
                 ? 'border-primary bg-primary/10 scale-[1.02]'
-                : 'border-white/20 bg-white/5 hover:border-primary/50 hover:bg-white/10'
+                : 'border-gray-200 bg-white/80 hover:border-primary/50 hover:bg-white'
                 }`}
         >
             <input
@@ -124,19 +124,19 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
                 <label htmlFor="csvValidation" className="cursor-pointer w-full h-full flex flex-col items-center justify-center gap-4">
                     {parsing ? (
                         <div className="flex flex-col items-center gap-3">
-                            <div className="w-8 h-8 border-2 border-white/50 border-t-white rounded-full animate-spin" />
-                            <p className="text-white/80 font-medium">Parsing CSV...</p>
+                            <div className="w-8 h-8 border-2 border-gray-300 border-t-primary rounded-full animate-spin" />
+                            <p className="text-gray-600 font-medium">Parsing CSV...</p>
                         </div>
                     ) : (
                         <>
-                            <div className={`p-4 rounded-full transition-all duration-300 ${isDragOver ? 'bg-primary/20 text-primary' : 'bg-white/10 text-white/70 group-hover:bg-primary/10 group-hover:text-primary group-hover:scale-110'}`}>
+                            <div className={`p-4 rounded-full transition-all duration-300 ${isDragOver ? 'bg-primary/20 text-primary' : 'bg-gray-100 text-gray-500 group-hover:bg-primary/10 group-hover:text-primary group-hover:scale-110'}`}>
                                 <UploadCloud className="w-10 h-10" />
                             </div>
                             <div>
-                                <p className="text-xl font-semibold text-white mb-2">
+                                <p className="text-xl font-semibold text-gray-900 mb-2">
                                     Drag & Drop CSV here
                                 </p>
-                                <p className="text-white/50 group-hover:text-white/70 transition-colors">
+                                <p className="text-gray-500 group-hover:text-gray-700 transition-colors">
                                     or click to browse files
                                 </p>
                             </div>
@@ -144,10 +144,10 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
                     )}
                 </label>
                 {!parsing && (
-                    <div className="mt-4 pt-4 border-t border-white/10 w-full">
+                    <div className="mt-4 pt-4 border-t border-gray-100 w-full">
                         <button
                             onClick={loadSampleData}
-                            className="text-primary hover:text-emerald-400 text-sm font-medium transition-colors underline decoration-primary/30 underline-offset-4"
+                            className="text-primary hover:text-emerald-600 text-sm font-medium transition-colors underline decoration-primary/30 underline-offset-4"
                         >
                             Don't have a file? Try with sample data
                         </button>
