@@ -3,7 +3,8 @@
     "compilerOptions": {
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
-        "noEmit": false,
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
         "outDir": "dist",
         "isolatedModules": false
     },

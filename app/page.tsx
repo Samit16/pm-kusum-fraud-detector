@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<any>(null);
+  const [processingTime, setProcessingTime] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
@@ -60,6 +61,7 @@ export default function Home() {
   const handleDataParsed = async (data: any[]) => {
     setLoading(true);
     setError(null);
+    const startTime = performance.now();
     try {
       const response = await fetch('http://localhost:3001/api/analyze', {
         method: 'POST',
@@ -74,6 +76,8 @@ export default function Home() {
       }
 
       const result = await response.json();
+      const endTime = performance.now();
+      setProcessingTime(Math.round(endTime - startTime));
       setResults(result);
     } catch (err: any) {
       setError(err.message || 'An error occurred during analysis');
@@ -126,6 +130,11 @@ export default function Home() {
     }
   };
 
+  // Placeholder for future auth integration
+  const handleAuthAction = (action: string) => {
+    console.log(`[Auth] ${action} triggered`);
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -139,8 +148,10 @@ export default function Home() {
         <Dashboard
           summary={results.summary}
           results={results.results}
+          processingTime={processingTime}
           onReset={() => {
             setResults(null);
+            setProcessingTime(null);
             setShowUpload(false);
           }}
         />
@@ -157,17 +168,13 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white text-lg font-bold">PK</span>
+                <span className="text-white text-lg font-bold">SS</span>
               </div>
-              <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
+              <h1 className="text-xl font-bold text-white drop-shadow-md">SolarSuraksha</h1>
             </div>
             <button
               onClick={() => setShowUpload(false)}
-<<<<<<< HEAD
-              className="px-4 py-2 text-sm font-medium text-white hover:text-gray-200 transition-colors"
-=======
               className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all"
->>>>>>> 671fc93a3647ce1a64a1f31241479e1195f226b8
             >
               ← Back to Home
             </button>
@@ -184,7 +191,7 @@ export default function Home() {
             <div className="bg-black/20 backdrop-blur-md rounded-3xl border border-white/10 p-8 md:p-12 shadow-2xl">
               <div className="mb-8 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 text-shadow-sm">Upload Data</h2>
-                <p className="text-gray-200 text-lg">Submit CSV files for validation and fraud detection</p>
+                <p className="text-gray-200 text-lg">Submit CSV files for verification</p>
               </div>
               <CSVUploader
                 onDataParsed={handleDataParsed}
@@ -211,18 +218,18 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white text-lg font-bold">PK</span>
+                <span className="text-white text-lg font-bold">SS</span>
               </div>
-              <h1 className="text-xl font-bold text-white drop-shadow-md">PM-KUSUM</h1>
+              <h1 className="text-xl font-bold text-white drop-shadow-md">SolarSuraksha</h1>
             </div>
 
             <div className="flex items-center gap-3">
-              <a
-                href="#"
+              <button
+                onClick={() => setShowUpload(true)}
                 className="hidden sm:block px-5 py-2.5 text-sm font-medium bg-gradient-to-r from-primary to-emerald-600 text-white rounded-lg shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
               >
                 Dashboard
-              </a>
+              </button>
               {user ? (
                 <div className="relative">
                   <button
@@ -232,24 +239,30 @@ export default function Home() {
                     <User className="w-5 h-5 text-gray-900" />
                   </button>
                   {showProfileMenu && (
-                    <div className="absolute right-0 mt-2 w-48 glass-card rounded-xl shadow-lg overflow-hidden">
-                      <div className="p-3 border-b border-white/20">
-                        <p className="text-sm font-medium text-white truncate">{user.email}</p>
+                    <>
+                      <div
+                        className="fixed inset-0 z-0"
+                        onClick={() => setShowProfileMenu(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-48 glass-card rounded-xl shadow-lg overflow-hidden z-10">
+                        <div className="p-3 border-b border-white/20">
+                          <p className="text-sm font-medium text-white truncate">{user.email}</p>
+                        </div>
+                        <button
+                          onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
+                          className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors"
+                        >
+                          Upload CSV
+                        </button>
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors flex items-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          Sign Out
+                        </button>
                       </div>
-                      <button
-                        onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
-                        className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors"
-                      >
-                        Upload CSV
-                      </button>
-                      <button
-                        onClick={handleSignOut}
-                        className="w-full px-4 py-2 text-left text-sm text-white hover:bg-white/10 transition-colors flex items-center gap-2"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        Sign Out
-                      </button>
-                    </div>
+                    </>
                   )}
                 </div>
               ) : (
@@ -272,11 +285,11 @@ export default function Home() {
             </div>
 
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-              PM-KUSUM Verification
+              SolarSuraksha Verification
             </h2>
 
             <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10">
-              Detect irregularities in solar subsidy applications through automated validation
+              Detect irregularities in PM-KUSUM solar subsidy applications through automated validation
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -289,13 +302,6 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
-
-              <a
-                href="#features"
-                className="px-8 py-4 glass-button text-gray-900 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
-              >
-                Learn More
-              </a>
             </div>
           </section>
 
@@ -384,14 +390,11 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">Ready to Begin?</h3>
                 <p className="text-gray-200 mb-8">Start validating beneficiary data now</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
-                    Open Dashboard
-                  </button>
                   <button
                     onClick={() => setShowUpload(true)}
-                    className="px-8 py-4 glass-button text-gray-900 rounded-xl font-semibold transition-all duration-300 hover:scale-105" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
+                    className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105"
                   >
-                    Upload Data
+                    Open Dashboard
                   </button>
                 </div>
               </div>
@@ -399,11 +402,46 @@ export default function Home() {
           </section>
         </main>
 
-        <footer className="border-t border-white/10 glass-header py-8 mt-20">
-          <div className="max-w-7xl mx-auto px-6 text-center text-sm text-white">
-            <p>© 2024 PM-KUSUM Fraud Detection System. Government of India.</p>
+        <footer className="border-t border-white/10 glass-header py-12 mt-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-primary to-emerald-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">SS</span>
+                </div>
+                <p className="text-sm font-medium text-white">SolarSuraksha Verification</p>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-8">
+                {['Privacy Policy', 'Terms of Service', 'Help Center', 'API Documentation'].map((link) => (
+                  <a
+                    key={link}
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
+                    className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    {link}
+                  </a>
+                ))}
+              </div>
+
+              <div className="text-sm text-gray-500">
+                © {new Date().getFullYear()} Government of India.
+              </div>
+            </div>
+            <div className="mt-8 pt-8 border-t border-white/5 text-center">
+              <p className="text-xs text-gray-600">
+                Official portal for automated solar subsidy application audit and verification.
+              </p>
+            </div>
           </div>
         </footer>
+
+        <style jsx global>{`
+          html {
+            scroll-behavior: smooth;
+          }
+        `}</style>
       </div>
 
       {showSignIn && (
@@ -419,7 +457,7 @@ export default function Home() {
 
               <div className="flex justify-center mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-primary to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30">
-                  <span className="text-white text-2xl font-bold">PK</span>
+                  <span className="text-white text-2xl font-bold">SS</span>
                 </div>
               </div>
 
@@ -473,7 +511,11 @@ export default function Home() {
                     />
                     <span className="text-sm text-gray-200">Remember me</span>
                   </label>
-                  <a href="#" className="text-sm font-medium text-white hover:text-gray-200 transition-colors">
+                  <a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); handleAuthAction('Password Recovery'); }}
+                    className="text-sm font-medium text-white hover:text-gray-200 transition-colors"
+                  >
                     Forgot password?
                   </a>
                 </div>
@@ -510,7 +552,10 @@ export default function Home() {
                   </svg>
                   <span className="text-sm font-medium text-white">Google</span>
                 </button>
-                <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-colors">
+                <button
+                  onClick={() => handleAuthAction('GitHub Integration')}
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition-colors"
+                >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                   </svg>
@@ -520,7 +565,11 @@ export default function Home() {
 
               <p className="mt-6 text-center text-sm text-gray-200">
                 Not a member?{' '}
-                <a href="#" className="font-medium text-primary hover:text-primary/80 transition-colors">
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); handleAuthAction('Trial Registration'); }}
+                  className="font-medium text-primary hover:text-primary/80 transition-colors"
+                >
                   Start a 14 day free trial
                 </a>
               </p>

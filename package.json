@@ -4,11 +4,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"npm run next\" \"npm run server\"",
+    "next": "next dev",
+    "server": "nodemon --watch server --exec ts-node --project server/tsconfig.json server/index.ts",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "backend": "nodemon --watch server --exec ts-node --project server/tsconfig.json server/index.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
@@ -37,6 +38,7 @@
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "nodemon": "^3.1.11",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter } from "next/font/google"; // Keep Inter as base for now, can switch if user prefers
 import "./globals.css";
 
 const inter = Inter({
@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PM-KUSUM Fraud Detection | Admin Portal",
-  description: "Government portal for PM-KUSUM beneficiary fraud detection and analysis",
+  title: "SolarSuraksha | Admin Portal", // Updated Name
+  description: "Government portal for SolarSuraksha beneficiary fraud detection and analysis", // Updated Name
 };
 
 export default function RootLayout({
