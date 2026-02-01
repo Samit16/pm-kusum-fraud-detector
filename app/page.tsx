@@ -290,42 +290,54 @@ export default function Home() {
         </header>
 
         <main>
-          <section className="max-w-6xl mx-auto px-6 py-24 text-center">
-            <div className="flex justify-center mb-8">
-              <div className="relative w-40 h-40 animate-in zoom-in duration-700 drop-shadow-2xl rounded-full overflow-hidden">
-                <Image
-                  src="/images/logo.png"
-                  alt="SolarSuraksha Hero Logo"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="text-left space-y-8 animate-in slide-in-from-left duration-1000">
+                <div className="flex items-center gap-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-xl bg-white p-1">
+                    <Image src="/images/logo.png" alt="Logo" fill className="object-cover" />
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
+                  </div>
+                </div>
+
+                <h2 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] drop-shadow-2xl">
+                  PM-KUSUM <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400">Beneficiary Audit</span> <br />
+                  System
+                </h2>
+
+                <p className="text-xl text-gray-200 max-w-xl leading-relaxed font-medium">
+                  Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                  <button
+                    onClick={() => setShowUpload(true)}
+                    className="group px-8 py-5 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-2xl font-bold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 hover:scale-105 active:scale-95 text-lg"
+                  >
+                    <span className="flex items-center gap-3">
+                      Upload Applications for Screening
+                      <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                    </span>
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
-              <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
-            </div>
-
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg text-balance">
-              PM-KUSUM Beneficiary Audit System
-            </h2>
-
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-              Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => setShowUpload(true)}
-                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="flex items-center gap-2">
-                  Upload Applications for Screening
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
+              <div className="relative flex justify-center lg:justify-end animate-in slide-in-from-right zoom-in duration-1000">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary/10 blur-[120px] rounded-full -z-10" />
+                <div className="relative w-full max-w-[550px] aspect-square">
+                  <Image
+                    src="/images/mascot.png"
+                    alt="Solar Suraksha Mascot"
+                    fill
+                    className="object-contain drop-shadow-[0_35px_60px_rgba(16,185,129,0.4)] animate-float"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
           </section>
 
