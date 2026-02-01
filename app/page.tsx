@@ -292,12 +292,12 @@ export default function Home() {
         <main>
           <section className="max-w-6xl mx-auto px-6 py-24 text-center">
             <div className="flex justify-center mb-8">
-              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white/30 shadow-2xl shadow-black/20 bg-white animate-in zoom-in duration-700">
+              <div className="relative w-40 h-40 animate-in zoom-in duration-700 drop-shadow-2xl">
                 <Image
                   src="/images/logo.png"
                   alt="SolarSuraksha Hero Logo"
                   fill
-                  className="object-cover p-2"
+                  className="object-contain"
                   priority
                 />
               </div>
