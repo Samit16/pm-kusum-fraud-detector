@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import CSVUploader from '@/components/CSVUploader';
 import Dashboard from '@/components/Dashboard';
 import { Upload, FileCheck, AlertTriangle, ClipboardCheck, ArrowRight, Shield, X, User, LogOut } from 'lucide-react';
@@ -167,8 +168,13 @@ export default function Home() {
         <header className="sticky top-0 z-50 glass-header border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white text-lg font-bold">SS</span>
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white border border-white/20 shadow-lg shadow-primary/20">
+                <Image
+                  src="/images/logo.png"
+                  alt="SolarSuraksha Logo"
+                  fill
+                  className="object-cover p-0.5"
+                />
               </div>
               <h1 className="text-xl font-bold text-white drop-shadow-md">SolarSuraksha</h1>
             </div>
@@ -217,8 +223,14 @@ export default function Home() {
         <header className="fixed top-0 left-0 right-0 z-50 glass-header">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-white text-lg font-bold">SS</span>
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white">
+                <Image
+                  src="/images/logo.png"
+                  alt="SolarSuraksha Logo"
+                  fill
+                  className="object-cover p-0.5"
+                  priority
+                />
               </div>
               <h1 className="text-xl font-bold text-white drop-shadow-md">SolarSuraksha</h1>
             </div>
@@ -406,8 +418,13 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-emerald-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">SS</span>
+                <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-white border border-white/20">
+                  <Image
+                    src="/images/logo.png"
+                    alt="SolarSuraksha Logo"
+                    fill
+                    className="object-cover p-0.5"
+                  />
                 </div>
                 <p className="text-sm font-medium text-white">SolarSuraksha Verification</p>
               </div>
@@ -456,8 +473,13 @@ export default function Home() {
               </button>
 
               <div className="flex justify-center mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-primary to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30">
-                  <span className="text-white text-2xl font-bold">SS</span>
+                <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-white border-2 border-white/20 shadow-lg shadow-black/20">
+                  <Image
+                    src="/images/logo.png"
+                    alt="SolarSuraksha Logo"
+                    fill
+                    className="object-cover p-1"
+                  />
                 </div>
               </div>
 
