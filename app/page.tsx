@@ -223,12 +223,12 @@ export default function Home() {
         <header className="fixed top-0 left-0 right-0 z-50 glass-header-footer">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/30 shadow-sm bg-white/10">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo_v2.png"
                   alt="SolarSuraksha Logo"
                   fill
-                  className="object-cover p-1"
+                  className="object-cover"
                   priority
                 />
               </div>
@@ -294,8 +294,8 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-left space-y-8 animate-in slide-in-from-left duration-1000">
                 <div className="flex items-center gap-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-xl bg-white p-1">
-                    <Image src="/images/logo.png" alt="Logo" fill className="object-cover" />
+                  <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-xl">
+                    <Image src="/images/logo_v2.png" alt="Logo" fill className="object-cover" />
                   </div>
                   <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
                     <Shield className="w-4 h-4 text-primary" />
@@ -332,15 +332,13 @@ export default function Home() {
                 {/* 
                    Transparent mascot floating naturally on the background 
                 */}
-                <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[130px] rounded-full -z-10 animate-pulse" />
-                  <div className="relative w-full h-full animate-float overflow-hidden">
+                <div className="relative w-full max-w-[720px] aspect-square flex items-center justify-center">
+                  <div className="relative w-full h-full animate-float">
                     <Image
-                      src="/images/mascot_transparent.png"
+                      src="/images/mascot_v2.png"
                       alt="Solar Suraksha Official Mascot"
                       fill
-                      className="object-contain drop-shadow-[0_20px_40px_rgba(16,185,129,0.25)] scale-125 translate-y-[10%]"
-                      style={{ clipPath: 'inset(18% 0 0 0)' }}
+                      className="object-contain"
                       priority
                     />
                   </div>
@@ -452,9 +450,9 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/30 bg-white/10 shadow-sm">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm">
                     <Image
-                      src="/images/logo.png"
+                      src="/images/logo_v2.png"
                       alt="SolarSuraksha Logo"
                       fill
                       className="object-cover p-1"
@@ -543,12 +541,12 @@ export default function Home() {
               </button>
 
               <div className="flex justify-center mb-6">
-                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white/10">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden shadow-lg shadow-black/20">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/logo_v2.png"
                     alt="SolarSuraksha Logo"
                     fill
-                    className="object-cover p-1"
+                    className="object-cover"
                   />
                 </div>
               </div>
