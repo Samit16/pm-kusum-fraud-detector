@@ -72,13 +72,13 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
         <div className="w-full max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-white">ANALYSIS RESULTS</h2>
-                    <p className="text-gray-300">Comprehensive risk assessment for uploaded batch</p>
+                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">ANALYSIS RESULTS</h2>
+                    <p className="text-gray-600">Comprehensive risk assessment for uploaded batch</p>
                 </div>
                 <div className="flex gap-3 w-full md:w-auto">
                     <button
                         onClick={handleExport}
-                        className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 rounded-lg border border-white/20 text-white hover:bg-white/10 transition-colors font-medium tracking-wide text-sm"
+                        className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors font-medium tracking-wide text-sm"
                     >
                         <Download className="w-4 h-4" />
                         <span>EXPORT REPORT</span>
@@ -94,33 +94,33 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-2xl space-y-2">
-                    <p className="text-sm font-medium text-gray-300 uppercase tracking-wider">Total Applications</p>
-                    <p className="text-4xl font-bold text-white tracking-wider">{summary.total}</p>
+                <div className="bg-white/80 backdrop-blur-md border border-gray-200 p-6 rounded-2xl space-y-2 shadow-sm">
+                    <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Applications</p>
+                    <p className="text-4xl font-bold text-gray-900 tracking-wider">{summary.total}</p>
                 </div>
-                <div className="bg-red-500/20 backdrop-blur-md border border-red-500/30 p-6 rounded-2xl space-y-2">
-                    <p className="text-sm font-medium text-red-200 uppercase tracking-wider">High Risk</p>
-                    <p className="text-4xl font-bold text-white tracking-wider">{summary.highRisk}</p>
+                <div className="bg-red-50/80 backdrop-blur-md border border-red-100 p-6 rounded-2xl space-y-2">
+                    <p className="text-sm font-medium text-red-600 uppercase tracking-wider">High Risk</p>
+                    <p className="text-4xl font-bold text-red-700 tracking-wider">{summary.highRisk}</p>
                 </div>
-                <div className="bg-amber-500/20 backdrop-blur-md border border-amber-500/30 p-6 rounded-2xl space-y-2">
-                    <p className="text-sm font-medium text-amber-200 uppercase tracking-wider">Medium Risk</p>
-                    <p className="text-4xl font-bold text-white tracking-wider">{summary.mediumRisk}</p>
+                <div className="bg-amber-50/80 backdrop-blur-md border border-amber-100 p-6 rounded-2xl space-y-2">
+                    <p className="text-sm font-medium text-amber-600 uppercase tracking-wider">Medium Risk</p>
+                    <p className="text-4xl font-bold text-amber-700 tracking-wider">{summary.mediumRisk}</p>
                 </div>
-                <div className="bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 p-6 rounded-2xl space-y-2">
-                    <p className="text-sm font-medium text-emerald-200 uppercase tracking-wider">Low Risk</p>
-                    <p className="text-4xl font-bold text-white tracking-wider">{summary.lowRisk}</p>
+                <div className="bg-emerald-50/80 backdrop-blur-md border border-emerald-100 p-6 rounded-2xl space-y-2">
+                    <p className="text-sm font-medium text-emerald-600 uppercase tracking-wider">Low Risk</p>
+                    <p className="text-4xl font-bold text-emerald-700 tracking-wider">{summary.lowRisk}</p>
                 </div>
             </div>
 
             {/* Stats Summary & Processing Time */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 shadow-sm">
                 <div className="flex items-center gap-4">
                     <div className="p-3 bg-primary/10 rounded-xl">
                         <BarChart3 className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                        <p className="text-xs text-gray-400 uppercase tracking-wider">High Risk Share</p>
-                        <p className="text-xl font-bold text-white">{((summary.highRisk / summary.total) * 100).toFixed(1)}%</p>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">High Risk Share</p>
+                        <p className="text-xl font-bold text-gray-900">{((summary.highRisk / summary.total) * 100).toFixed(1)}%</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -128,8 +128,8 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
                         <FileText className="w-6 h-6 text-blue-500" />
                     </div>
                     <div>
-                        <p className="text-xs text-gray-400 uppercase tracking-wider">Data Consistency</p>
-                        <p className="text-xl font-bold text-white">{((summary.lowRisk / summary.total) * 100).toFixed(1)}%</p>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">Data Consistency</p>
+                        <p className="text-xl font-bold text-gray-900">{((summary.lowRisk / summary.total) * 100).toFixed(1)}%</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -137,58 +137,58 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
                         <Clock className="w-6 h-6 text-amber-500" />
                     </div>
                     <div>
-                        <p className="text-xs text-gray-400 uppercase tracking-wider">Processing Time</p>
-                        <p className="text-xl font-bold text-white">{processingTime || 0}ms</p>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">Processing Time</p>
+                        <p className="text-xl font-bold text-gray-900">{processingTime || 0}ms</p>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Table View */}
-                <div className="lg:col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl lg:max-h-[500px] overflow-y-auto">
-                    <table className="w-full text-left border-collapse text-white">
-                        <thead className="sticky top-0 bg-black/40 backdrop-blur-md z-20">
-                            <tr className="border-b border-white/10 text-xs text-gray-400 uppercase tracking-widest">
+                <div className="lg:col-span-2 bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl overflow-hidden shadow-xl lg:max-h-[500px] overflow-y-auto">
+                    <table className="w-full text-left border-collapse text-gray-900">
+                        <thead className="sticky top-0 bg-gray-50/90 backdrop-blur-md z-20">
+                            <tr className="border-b border-gray-200 text-xs text-gray-500 uppercase tracking-widest">
                                 <th className="px-6 py-4 font-semibold">Beneficiary</th>
                                 <th className="px-6 py-4 font-semibold">Risk Level</th>
                                 <th className="px-6 py-4 font-semibold">Confidence</th>
                                 <th className="px-6 py-4 font-semibold">Flags</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/10">
+                        <tbody className="divide-y divide-gray-100">
                             {results.map((row) => (
                                 <tr
                                     key={row.id}
                                     onClick={() => setSelectedApp(row)}
-                                    className={`hover:bg-white/5 transition-colors cursor-pointer group ${row.riskLevel === 'High' ? 'bg-red-500/10' : ''}`}
+                                    className={`hover:bg-gray-50 transition-colors cursor-pointer group ${row.riskLevel === 'High' ? 'bg-red-50' : ''}`}
                                 >
                                     <td className="px-6 py-4">
                                         <div className="flex flex-col">
                                             <span className="text-sm font-medium">{row.name}</span>
-                                            <span className="text-[10px] text-gray-400 font-mono">{row.id}</span>
+                                            <span className="text-[10px] text-gray-500 font-mono">{row.id}</span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${row.riskLevel === 'High' ? 'bg-red-500/20 text-red-300 border border-red-500/30' :
-                                            row.riskLevel === 'Medium' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
-                                                'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${row.riskLevel === 'High' ? 'bg-red-100 text-red-700 border border-red-200' :
+                                            row.riskLevel === 'Medium' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
+                                                'bg-emerald-100 text-emerald-700 border border-emerald-200'
                                             }`}>
                                             {row.riskLevel}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                        <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
                                             <div
                                                 className={`h-full rounded-full ${row.riskLevel === 'High' ? 'bg-red-500' : row.riskLevel === 'Medium' ? 'bg-amber-500' : 'bg-emerald-500'}`}
                                                 style={{ width: `${getConfidence(row.flags)}%` }}
                                             />
                                         </div>
-                                        <span className="text-[10px] text-gray-400 mt-1 block">{getConfidence(row.flags)}%</span>
+                                        <span className="text-[10px] text-gray-500 mt-1 block">{getConfidence(row.flags)}%</span>
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex flex-wrap gap-1">
                                             {row.flags.map((f: any, i: number) => (
-                                                <span key={i} className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded border border-white/10" title={f.description}>
+                                                <span key={i} className="text-[10px] bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded border border-gray-200" title={f.description}>
                                                     {f.type}
                                                 </span>
                                             ))}
@@ -202,9 +202,9 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
                 </div>
 
                 {/* Map View */}
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl min-h-[500px] flex flex-col">
-                    <div className="p-4 border-b border-white/10 bg-white/5">
-                        <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Geospatial Risk Map (High Risk Only)</p>
+                <div className="bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl overflow-hidden shadow-xl min-h-[500px] flex flex-col">
+                    <div className="p-4 border-b border-gray-200 bg-gray-50/50">
+                        <p className="text-xs font-bold text-red-600 uppercase tracking-widest">Geospatial Risk Map (High Risk Only)</p>
                     </div>
                     <div className="flex-1">
                         <FraudMap points={mapPoints} />
@@ -215,17 +215,17 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
             {/* Application Detail Modal */}
             {selectedApp && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
-                    <div className="bg-gray-900 border border-white/10 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-                        <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
+                    <div className="bg-white border border-gray-200 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+                        <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                             <div>
-                                <h3 className="text-xl font-bold text-white">{selectedApp.name}</h3>
-                                <p className="text-sm text-gray-400">Application Audit Journal • #{selectedApp.id}</p>
+                                <h3 className="text-xl font-bold text-gray-900">{selectedApp.name}</h3>
+                                <p className="text-sm text-gray-500">Application Audit Journal • #{selectedApp.id}</p>
                             </div>
                             <button
                                 onClick={() => setSelectedApp(null)}
-                                className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                             >
-                                <X className="w-6 h-6 text-gray-400" />
+                                <X className="w-6 h-6 text-gray-500" />
                             </button>
                         </div>
 
@@ -235,12 +235,12 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
                                     <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Risk Classification</p>
                                     <div className="flex items-center gap-2">
                                         <div className={`w-3 h-3 rounded-full ${selectedApp.riskLevel === 'High' ? 'bg-red-500' : selectedApp.riskLevel === 'Medium' ? 'bg-amber-500' : 'bg-emerald-500'}`} />
-                                        <span className="font-bold text-white uppercase tracking-wider">{selectedApp.riskLevel} Risk</span>
+                                        <span className="font-bold text-gray-900 uppercase tracking-wider">{selectedApp.riskLevel} Risk</span>
                                     </div>
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Verified Aadhaar</p>
-                                    <p className="font-mono text-white">{selectedApp.aadhaar_last4 ? `XXXX XXXX ${selectedApp.aadhaar_last4}` : 'N/A'}</p>
+                                    <p className="font-mono text-gray-900">{selectedApp.aadhaar_last4 ? `XXXX XXXX ${selectedApp.aadhaar_last4}` : 'N/A'}</p>
                                 </div>
                             </div>
 
@@ -249,13 +249,13 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
                                 {selectedApp.flags.length > 0 ? (
                                     <div className="space-y-3">
                                         {selectedApp.flags.map((flag: any, idx: number) => (
-                                            <div key={idx} className="p-4 bg-white/5 border border-white/10 rounded-2xl flex gap-4">
+                                            <div key={idx} className="p-4 bg-gray-50 border border-gray-100 rounded-2xl flex gap-4">
                                                 <div className="mt-1">
                                                     <div className="w-2 h-2 rounded-full bg-primary" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-bold text-white mb-1">{flag.type.replace(/_/g, ' ')}</p>
-                                                    <p className="text-sm text-gray-400 leading-relaxed">{flag.description}</p>
+                                                    <p className="text-sm font-bold text-gray-900 mb-1">{flag.type.replace(/_/g, ' ')}</p>
+                                                    <p className="text-sm text-gray-600 leading-relaxed">{flag.description}</p>
                                                 </div>
                                             </div>
                                         ))}
@@ -267,10 +267,10 @@ export default function Dashboard({ summary, results, processingTime, onReset }:
                                 )}
                             </div>
 
-                            <div className="pt-6 border-t border-white/10 flex justify-end gap-3">
+                            <div className="pt-6 border-t border-gray-100 flex justify-end gap-3">
                                 <button
                                     onClick={() => setSelectedApp(null)}
-                                    className="px-6 py-2 text-sm text-gray-400 font-medium hover:text-white transition-colors"
+                                    className="px-6 py-2 text-sm text-gray-600 font-medium hover:text-gray-900 transition-colors"
                                 >
                                     Close
                                 </button>
