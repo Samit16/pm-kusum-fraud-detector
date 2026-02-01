@@ -73,52 +73,6 @@ CSV Parsing:          PapaParse
 Charts:               Recharts
 Maps:                 Leaflet.js + React-Leaflet
 Deployment:           Vercel
-```
-
-### Why This Stack?
-- **No backend required** - Next.js API routes handle everything
-- **Vibe-code friendly** - Extensive documentation and examples
-- **Offline-capable** - CSV processing runs client-side
-- **Free tier deployment** - Zero hosting costs for demo
-- **Government-ready** - Can be self-hosted on NIC servers
-
----
-
-## 📦 Project Structure
-
-```
-pm-kusum-fraud-detector/
-├── app/
-│   ├── page.tsx                 # Landing/upload page
-│   ├── dashboard/
-│   │   └── page.tsx            # Results dashboard
-│   ├── api/
-│   │   ├── analyze/route.ts    # Fraud detection logic
-│   │   └── export/route.ts     # Report generation
-│   └── layout.tsx
-├── components/
-│   ├── UploadCSV.tsx           # Drag-drop CSV upload
-│   ├── ResultsTable.tsx        # Flagged applications table
-│   ├── RiskScoreCard.tsx       # Visual risk indicators
-│   ├── MapView.tsx             # GPS clustering map
-│   ├── ConfidenceModal.tsx     # Detailed flag explanation
-│   └── ui/                     # shadcn components
-├── lib/
-│   ├── fraudDetection.ts       # Core detection algorithms
-│   ├── geoUtils.ts             # GPS distance calculations
-│   ├── confidenceScoring.ts    # Mutation A logic
-│   ├── partialDataHandler.ts   # Mutation B logic
-│   └── supabase.ts             # Database client
-├── types/
-│   └── application.ts          # TypeScript interfaces
-├── public/
-│   └── sample-data.csv         # Demo dataset
-└── docs/
-    ├── PRD.md                  # Product Requirements
-    ├── MVP.md                  # MVP Scope
-    ├── ROADMAP.md              # Build timeline
-    └── AI_GUIDELINES.md        # LLM coding instructions
-```
 
 ---
 
@@ -155,7 +109,7 @@ npm run backend
 Open [http://localhost:3000](http://localhost:3000)
 
 ### Quick Start (No Setup)
-1. Visit deployed demo: [pm-kusum-detector.vercel.app](#)
+1. Visit deployed demo: [solar-suraksha.vercel.app/](#)
 2. Download `sample-data.csv` from homepage
 3. Upload CSV and see fraud detection in action
 
