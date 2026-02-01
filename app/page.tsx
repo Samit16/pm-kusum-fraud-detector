@@ -305,24 +305,24 @@ export default function Home() {
 
             <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
               <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-gray-900">Fraud Detection System</span>
+              <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-              SolarSuraksha Verification
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg text-balance">
+              PM-KUSUM Beneficiary Audit System
             </h2>
 
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10">
-              Detect irregularities in PM-KUSUM solar subsidy applications through automated validation
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+              Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={() => setShowUpload(true)}
-                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105"
+                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 <span className="flex items-center gap-2">
-                  Get Started
+                  Upload Applications for Screening
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -331,8 +331,8 @@ export default function Home() {
 
           <section id="features" className="max-w-6xl mx-auto px-6 py-20 pt-32">
             <div className="text-center mb-16">
-              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">Core Capabilities</h3>
-              <p className="text-gray-200 max-w-2xl mx-auto">Comprehensive tools for fraud detection and data validation</p>
+              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg font-display tracking-tight text-balance">System Audit Framework</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto font-medium">Official protocols for fraud identification and application vetting</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="group p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
@@ -341,8 +341,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <Upload className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Data Upload</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Submit beneficiary data via CSV</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Batch Intake</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Ingest massive beneficiary datasets for concurrent processing</p>
                 </div>
               </div>
 
@@ -352,8 +352,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <FileCheck className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Validation</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Rule-based integrity checks</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Heuristic Screening</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Execute rule-based integrity checks across field datasets</p>
                 </div>
               </div>
 
@@ -363,8 +363,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <AlertTriangle className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Flagging</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Identify suspect entries</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Pattern Isolation</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Identify suspect clusters and anomalous behavioral patterns</p>
                 </div>
               </div>
 
@@ -374,8 +374,8 @@ export default function Home() {
                   <div className="w-14 h-14 backdrop-blur-md bg-gradient-to-br from-primary/30 to-emerald-600/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-primary/20">
                     <ClipboardCheck className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-bold text-lg text-white mb-2">Reports</h4>
-                  <p className="text-sm text-gray-300 leading-relaxed">Export audit summaries</p>
+                  <h4 className="font-bold text-lg text-white mb-2">Official Dossier</h4>
+                  <p className="text-sm text-gray-300 leading-relaxed font-medium">Generate compliance-ready audit reports for field officers</p>
                 </div>
               </div>
             </div>
@@ -383,15 +383,15 @@ export default function Home() {
 
           <section id="how-it-works" className="max-w-5xl mx-auto px-6 py-20">
             <div className="text-center mb-16">
-              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">How It Works</h3>
-              <p className="text-gray-200 max-w-2xl mx-auto">Simple four-step process from data submission to final review</p>
+              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-lg font-display tracking-tight">Audit Lifecycle</h3>
+              <p className="text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed">Four-stage automated screening process for application vetting</p>
             </div>
             <div className="space-y-6">
               {[
-                { num: 1, title: 'Upload', desc: 'Submit CSV with beneficiary data' },
-                { num: 2, title: 'Validate', desc: 'System runs integrity checks' },
-                { num: 3, title: 'Flag', desc: 'Irregularities are categorized' },
-                { num: 4, title: 'Review', desc: 'Examine results and export reports' }
+                { num: 1, title: 'Secure Data Ingestion', desc: 'Encrypted transfer of beneficiary datasets (CSV/Batch)' },
+                { num: 2, title: 'Core Validation', desc: 'System executes heuristic and cross-reference checks' },
+                { num: 3, title: 'Risk Stratification', desc: 'Anomalies are classified by advisory risk levels' },
+                { num: 4, title: 'Advisory Review', desc: 'Final audit report generation for field validation' }
               ].map((step) => (
                 <div key={step.num} className="group flex items-center gap-8 p-8 glass-card rounded-2xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -412,13 +412,13 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl pointer-events-none" />
               <div className="relative z-10">
                 <h3 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">Ready to Begin?</h3>
-                <p className="text-gray-200 mb-8">Start validating beneficiary data now</p>
+                <p className="text-gray-200 mb-8 font-medium">Commence automated application screening and audit verification</p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <button
                     onClick={() => setShowUpload(true)}
-                    className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-semibold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105"
+                    className="px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105"
                   >
-                    Open Dashboard
+                    Access Audit Dashboard
                   </button>
                 </div>
               </div>

@@ -133,11 +133,11 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
                                 <UploadCloud className="w-10 h-10" />
                             </div>
                             <div>
-                                <p className="text-xl font-semibold text-gray-900 mb-2">
-                                    Drag & Drop CSV here
+                                <p className="text-xl font-bold text-gray-900 mb-2">
+                                    Submit Beneficiary Dataset (CSV)
                                 </p>
-                                <p className="text-gray-500 group-hover:text-gray-700 transition-colors">
-                                    or click to browse files
+                                <p className="text-gray-500 group-hover:text-gray-700 transition-colors font-medium">
+                                    Authorized upload protocol for batch screening
                                 </p>
                             </div>
                         </>
@@ -147,9 +147,9 @@ export default function CSVUploader({ onDataParsed, onError }: CSVUploaderProps)
                     <div className="mt-4 pt-4 border-t border-gray-100 w-full">
                         <button
                             onClick={loadSampleData}
-                            className="text-primary hover:text-emerald-600 text-sm font-medium transition-colors underline decoration-primary/30 underline-offset-4"
+                            className="text-primary hover:text-emerald-600 text-sm font-bold transition-colors underline decoration-primary/30 underline-offset-4"
                         >
-                            Don't have a file? Try with sample data
+                            Simulate via official sample dataset
                         </button>
                     </div>
                 )}

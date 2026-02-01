@@ -60,7 +60,8 @@ An intelligent CSV-based fraud detection dashboard that flags suspicious applica
 - **Logo Creation**
 - **GlassMorphism Design**
 - **Micro Animations and scroll effects**
-
+- **Mascot Creation**
+- **SEO features and data**
 ---
 
 ## 🏗️ Tech Stack
