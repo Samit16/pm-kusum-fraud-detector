@@ -326,31 +326,6 @@ export default function Home() {
                 </div>
               </div>
 
-<<<<<<< HEAD
-            <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
-              <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-gray-900">Subsidy Fraud Detection Portal</span>
-            </div>
-
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg text-balance">
-              PM-KUSUM Beneficiary Audit System
-            </h2>
-
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-              Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => setShowUpload(true)}
-                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="flex items-center gap-2">
-                  Upload Applications for Screening
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-=======
               <div className="relative flex justify-center lg:justify-end animate-in slide-in-from-right zoom-in duration-1000">
                 {/* 
                    Transparent mascot floating naturally on the background 
@@ -369,7 +344,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
->>>>>>> ac71b3c01c469853ec6a08899b0d570daf579dba
             </div>
           </section>
 
