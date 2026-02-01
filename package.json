@@ -4,9 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run next\" \"npm run server\"",
+    "dev": "next dev",
     "next": "next dev",
-    "server": "tsx watch server/index.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
