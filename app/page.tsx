@@ -191,13 +191,13 @@ export default function Home() {
           {loading ? (
             <div className="flex flex-col items-center gap-6 py-20 bg-white/90 backdrop-blur-md rounded-3xl border border-gray-200 p-12 shadow-xl">
               <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-              <p className="text-lg font-medium text-gray-900">Processing data...</p>
+              <p className="text-lg font-medium text-white">Processing data...</p>
             </div>
           ) : (
-            <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-gray-200 p-8 md:p-12 shadow-2xl">
+            <div className="glass-card rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Upload Data</h2>
-                <p className="text-gray-600 text-lg">Submit CSV files for verification</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Upload Data</h2>
+                <p className="text-gray-200 text-lg">Submit CSV files for verification</p>
               </div>
               <CSVUploader
                 onDataParsed={handleDataParsed}
@@ -223,12 +223,12 @@ export default function Home() {
         <header className="fixed top-0 left-0 right-0 z-50 glass-header-footer">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/30 shadow-sm bg-white/10">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo_v2.png"
                   alt="SolarSuraksha Logo"
                   fill
-                  className="object-cover p-1"
+                  className="object-cover"
                   priority
                 />
               </div>
@@ -256,19 +256,19 @@ export default function Home() {
                         className="fixed inset-0 z-0"
                         onClick={() => setShowProfileMenu(false)}
                       />
-                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden z-10">
-                        <div className="p-3 border-b border-gray-100 bg-gray-50">
-                          <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
+                      <div className="absolute right-0 mt-2 w-48 glass-card border border-white/20 rounded-xl shadow-xl overflow-hidden z-10">
+                        <div className="p-3 border-b border-white/20 bg-white/10">
+                          <p className="text-sm font-medium text-white truncate">{user.email}</p>
                         </div>
                         <button
                           onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
-                          className="w-full px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                          className="w-full px-4 py-2 text-left text-sm text-gray-200 hover:bg-white/10 hover:text-white transition-colors"
                         >
                           Upload CSV
                         </button>
                         <button
                           onClick={handleSignOut}
-                          className="w-full px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center gap-2"
+                          className="w-full px-4 py-2 text-left text-sm text-gray-200 hover:bg-white/10 hover:text-white transition-colors flex items-center gap-2"
                         >
                           <LogOut className="w-4 h-4" />
                           Sign Out
@@ -280,7 +280,7 @@ export default function Home() {
               ) : (
                 <button
                   onClick={() => setShowSignIn(true)}
-                  className="px-5 py-2.5 text-sm font-medium glass-button text-white rounded-lg transition-all duration-300"
+                  className="px-5 py-2.5 text-sm font-medium glass-button text-gray-900 rounded-lg transition-all duration-300"
                 >
                   Sign In
                 </button>
@@ -294,12 +294,12 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-left space-y-8 animate-in slide-in-from-left duration-1000">
                 <div className="flex items-center gap-4">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-xl bg-white p-1">
-                    <Image src="/images/logo.png" alt="Logo" fill className="object-cover" />
+                  <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-xl">
+                    <Image src="/images/logo_v2.png" alt="Logo" fill className="object-cover" />
                   </div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
+                  <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
                     <Shield className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
+                    <span className="text-sm font-semibold text-gray-900">Subsidy Fraud Detection Portal</span>
                   </div>
                 </div>
 
@@ -330,15 +330,13 @@ export default function Home() {
                 {/* 
                    Transparent mascot floating naturally on the background 
                 */}
-                <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[130px] rounded-full -z-10 animate-pulse" />
-                  <div className="relative w-full h-full animate-float overflow-hidden">
+                <div className="relative w-full max-w-[720px] aspect-square flex items-center justify-center">
+                  <div className="relative w-full h-full animate-float">
                     <Image
-                      src="/images/mascot_transparent.png"
+                      src="/images/mascot_v2.png"
                       alt="Solar Suraksha Official Mascot"
                       fill
-                      className="object-contain drop-shadow-[0_20px_40px_rgba(16,185,129,0.25)] scale-125 translate-y-[10%]"
-                      style={{ clipPath: 'inset(18% 0 0 0)' }}
+                      className="object-contain"
                       priority
                     />
                   </div>
@@ -449,9 +447,9 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/30 bg-white/10 shadow-sm">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-sm">
                     <Image
-                      src="/images/logo.png"
+                      src="/images/logo_v2.png"
                       alt="SolarSuraksha Logo"
                       fill
                       className="object-cover p-1"
@@ -531,7 +529,7 @@ export default function Home() {
       {showSignIn && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
           <div className="relative w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl relative border border-gray-100">
+            <div className="glass-card rounded-3xl p-6 md:p-8 shadow-2xl relative border border-white/20">
               <button
                 onClick={() => setShowSignIn(false)}
                 className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all"
@@ -540,18 +538,18 @@ export default function Home() {
               </button>
 
               <div className="flex justify-center mb-6">
-                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden shadow-lg shadow-black/20">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/logo_v2.png"
                     alt="SolarSuraksha Logo"
                     fill
-                    className="object-cover p-1"
+                    className="object-cover"
                   />
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-center text-gray-900 mb-2 tracking-tight">Login</h2>
-              <p className="text-center text-gray-500 mb-10 text-sm">Secure access to verification portal</p>
+              <h2 className="text-3xl font-bold text-center text-white mb-2 tracking-tight">Login</h2>
+              <p className="text-center text-gray-300 mb-10 text-sm">Secure access to verification portal</p>
 
               {authError && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm text-center">
@@ -561,7 +559,7 @@ export default function Home() {
 
               <form onSubmit={handleEmailLogin} className="space-y-5">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-200 mb-2">
                     Email address
                   </label>
                   <input
@@ -570,13 +568,13 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+                    className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
                     placeholder="you@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-200 mb-2">
                     Password
                   </label>
                   <input
@@ -585,7 +583,7 @@ export default function Home() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+                    className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -598,7 +596,7 @@ export default function Home() {
                       onChange={(e) => setRememberMe(e.target.checked)}
                       className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/40"
                     />
-                    <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">Stay signed in</span>
+                    <span className="text-sm text-gray-300 group-hover:text-white transition-colors">Stay signed in</span>
                   </label>
                   <a
                     href="#"
@@ -620,10 +618,10 @@ export default function Home() {
 
               <div className="mt-8 relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-100" />
+                  <div className="w-full border-t border-white/10" />
                 </div>
                 <div className="relative flex justify-center text-xs">
-                  <span className="px-4 bg-white text-gray-400 font-bold uppercase tracking-widest">Standard login</span>
+                  <span className="px-4 bg-transparent text-gray-400 font-bold uppercase tracking-widest">Standard login</span>
                 </div>
               </div>
 
@@ -631,7 +629,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm active:scale-[0.98]"
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all shadow-sm active:scale-[0.98]"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -639,10 +637,10 @@ export default function Home() {
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                   </svg>
-                  <span className="text-sm font-bold text-gray-700">Google</span>
+                  <span className="text-sm font-bold text-gray-200">Google</span>
                 </button>
 
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-400">
                   New administrator? <a href="#" className="font-bold text-primary hover:text-emerald-700 transition-colors uppercase tracking-tight">Request Access</a>
                 </p>
               </div>
