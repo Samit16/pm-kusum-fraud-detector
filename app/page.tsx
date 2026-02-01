@@ -168,7 +168,7 @@ export default function Home() {
         <header className="sticky top-0 z-50 glass-header border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white border border-white/20 shadow-lg shadow-primary/20">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 shadow-lg shadow-primary/20 bg-white">
                 <Image
                   src="/images/logo.png"
                   alt="SolarSuraksha Logo"
@@ -292,12 +292,12 @@ export default function Home() {
         <main>
           <section className="max-w-6xl mx-auto px-6 py-24 text-center">
             <div className="flex justify-center mb-8">
-              <div className="relative w-40 h-40 animate-in zoom-in duration-700 drop-shadow-2xl">
+              <div className="relative w-40 h-40 animate-in zoom-in duration-700 drop-shadow-2xl rounded-full overflow-hidden">
                 <Image
                   src="/images/logo.png"
                   alt="SolarSuraksha Hero Logo"
                   fill
-                  className="object-contain"
+                  className="object-cover"
                   priority
                 />
               </div>
@@ -430,7 +430,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-3">
-                <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-white border border-white/20">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 bg-white">
                   <Image
                     src="/images/logo.png"
                     alt="SolarSuraksha Logo"
@@ -485,7 +485,7 @@ export default function Home() {
               </button>
 
               <div className="flex justify-center mb-6">
-                <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-white border-2 border-white/20 shadow-lg shadow-black/20">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white">
                   <Image
                     src="/images/logo.png"
                     alt="SolarSuraksha Logo"
