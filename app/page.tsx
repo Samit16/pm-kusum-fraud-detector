@@ -290,19 +290,43 @@ export default function Home() {
         </header>
 
         <main>
-          <section className="max-w-6xl mx-auto px-6 py-24 text-center">
-            <div className="flex justify-center mb-8">
-              <div className="relative w-40 h-40 animate-in zoom-in duration-700 drop-shadow-2xl rounded-full overflow-hidden">
-                <Image
-                  src="/images/logo.png"
-                  alt="SolarSuraksha Hero Logo"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
+          <section className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="text-left space-y-8 animate-in slide-in-from-left duration-1000">
+                <div className="flex items-center gap-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-xl bg-white p-1">
+                    <Image src="/images/logo.png" alt="Logo" fill className="object-cover" />
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
+                  </div>
+                </div>
 
+                <h2 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] drop-shadow-2xl">
+                  PM-KUSUM <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400">Beneficiary Audit</span> <br />
+                  System
+                </h2>
+
+                <p className="text-xl text-gray-200 max-w-xl leading-relaxed font-medium">
+                  Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                  <button
+                    onClick={() => setShowUpload(true)}
+                    className="group px-8 py-5 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-2xl font-bold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 hover:scale-105 active:scale-95 text-lg"
+                  >
+                    <span className="flex items-center gap-3">
+                      Upload Applications for Screening
+                      <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+<<<<<<< HEAD
             <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
               <Shield className="w-4 h-4 text-primary" />
               <span className="text-sm font-semibold text-gray-900">Subsidy Fraud Detection Portal</span>
@@ -326,6 +350,26 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
+=======
+              <div className="relative flex justify-center lg:justify-end animate-in slide-in-from-right zoom-in duration-1000">
+                {/* 
+                   Transparent mascot floating naturally on the background 
+                */}
+                <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[130px] rounded-full -z-10 animate-pulse" />
+                  <div className="relative w-full h-full animate-float overflow-hidden">
+                    <Image
+                      src="/images/mascot_transparent.png"
+                      alt="Solar Suraksha Official Mascot"
+                      fill
+                      className="object-contain drop-shadow-[0_20px_40px_rgba(16,185,129,0.25)] scale-125 translate-y-[10%]"
+                      style={{ clipPath: 'inset(18% 0 0 0)' }}
+                      priority
+                    />
+                  </div>
+                </div>
+              </div>
+>>>>>>> ac71b3c01c469853ec6a08899b0d570daf579dba
             </div>
           </section>
 
