@@ -327,15 +327,20 @@ export default function Home() {
               </div>
 
               <div className="relative flex justify-center lg:justify-end animate-in slide-in-from-right zoom-in duration-1000">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-primary/10 blur-[120px] rounded-full -z-10" />
-                <div className="relative w-full max-w-[550px] aspect-square">
-                  <Image
-                    src="/images/mascot.png"
-                    alt="Solar Suraksha Mascot"
-                    fill
-                    className="object-contain drop-shadow-[0_35px_60px_rgba(16,185,129,0.4)] animate-float"
-                    priority
-                  />
+                {/* 
+                   Transparent mascot floating naturally on the background 
+                */}
+                <div className="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[130px] rounded-full -z-10 animate-pulse" />
+                  <div className="relative w-full h-full animate-float">
+                    <Image
+                      src="/images/mascot_transparent.png"
+                      alt="Solar Suraksha Official Mascot"
+                      fill
+                      className="object-contain drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
             </div>
