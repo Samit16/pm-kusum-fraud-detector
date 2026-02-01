@@ -191,13 +191,13 @@ export default function Home() {
           {loading ? (
             <div className="flex flex-col items-center gap-6 py-20 bg-white/90 backdrop-blur-md rounded-3xl border border-gray-200 p-12 shadow-xl">
               <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-              <p className="text-lg font-medium text-gray-900">Processing data...</p>
+              <p className="text-lg font-medium text-white">Processing data...</p>
             </div>
           ) : (
-            <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-gray-200 p-8 md:p-12 shadow-2xl">
+            <div className="glass-card rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
               <div className="mb-8 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Upload Data</h2>
-                <p className="text-gray-600 text-lg">Submit CSV files for verification</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Upload Data</h2>
+                <p className="text-gray-200 text-lg">Submit CSV files for verification</p>
               </div>
               <CSVUploader
                 onDataParsed={handleDataParsed}
@@ -256,19 +256,19 @@ export default function Home() {
                         className="fixed inset-0 z-0"
                         onClick={() => setShowProfileMenu(false)}
                       />
-                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden z-10">
-                        <div className="p-3 border-b border-gray-100 bg-gray-50">
-                          <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
+                      <div className="absolute right-0 mt-2 w-48 glass-card border border-white/20 rounded-xl shadow-xl overflow-hidden z-10">
+                        <div className="p-3 border-b border-white/20 bg-white/10">
+                          <p className="text-sm font-medium text-white truncate">{user.email}</p>
                         </div>
                         <button
                           onClick={() => { setShowUpload(true); setShowProfileMenu(false); }}
-                          className="w-full px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                          className="w-full px-4 py-2 text-left text-sm text-gray-200 hover:bg-white/10 hover:text-white transition-colors"
                         >
                           Upload CSV
                         </button>
                         <button
                           onClick={handleSignOut}
-                          className="w-full px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center gap-2"
+                          className="w-full px-4 py-2 text-left text-sm text-gray-200 hover:bg-white/10 hover:text-white transition-colors flex items-center gap-2"
                         >
                           <LogOut className="w-4 h-4" />
                           Sign Out
@@ -280,7 +280,7 @@ export default function Home() {
               ) : (
                 <button
                   onClick={() => setShowSignIn(true)}
-                  className="px-5 py-2.5 text-sm font-medium glass-button text-white rounded-lg transition-all duration-300"
+                  className="px-5 py-2.5 text-sm font-medium glass-button text-gray-900 rounded-lg transition-all duration-300"
                 >
                   Sign In
                 </button>
@@ -297,9 +297,9 @@ export default function Home() {
                   <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-xl bg-white p-1">
                     <Image src="/images/logo.png" alt="Logo" fill className="object-cover" />
                   </div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
+                  <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full shadow-lg shadow-black/10">
                     <Shield className="w-4 h-4 text-primary" />
-                    <span className="text-sm font-semibold text-gray-900">Audit Compliance Portal</span>
+                    <span className="text-sm font-semibold text-gray-900">Subsidy Fraud Detection Portal</span>
                   </div>
                 </div>
 
@@ -326,31 +326,8 @@ export default function Home() {
                 </div>
               </div>
 
-<<<<<<< HEAD
-            <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md bg-white/80 border border-white/90 rounded-full mb-6 shadow-lg shadow-black/10">
-              <Shield className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-gray-900">Subsidy Fraud Detection Portal</span>
-            </div>
 
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg text-balance">
-              PM-KUSUM Beneficiary Audit System
-            </h2>
 
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-              Identify and mitigate compliance deviations in application data through automated cross-validation and risk analysis.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => setShowUpload(true)}
-                className="group px-8 py-4 bg-gradient-to-r from-primary to-emerald-600 text-white rounded-xl font-bold shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="flex items-center gap-2">
-                  Upload Applications for Screening
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-=======
               <div className="relative flex justify-center lg:justify-end animate-in slide-in-from-right zoom-in duration-1000">
                 {/* 
                    Transparent mascot floating naturally on the background 
@@ -369,7 +346,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
->>>>>>> ac71b3c01c469853ec6a08899b0d570daf579dba
+
             </div>
           </section>
 
@@ -557,7 +534,7 @@ export default function Home() {
       {showSignIn && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
           <div className="relative w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl relative border border-gray-100">
+            <div className="glass-card rounded-3xl p-6 md:p-8 shadow-2xl relative border border-white/20">
               <button
                 onClick={() => setShowSignIn(false)}
                 className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all"
@@ -566,7 +543,7 @@ export default function Home() {
               </button>
 
               <div className="flex justify-center mb-6">
-                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/20 shadow-lg shadow-black/20 bg-white/10">
                   <Image
                     src="/images/logo.png"
                     alt="SolarSuraksha Logo"
@@ -576,8 +553,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-center text-gray-900 mb-2 tracking-tight">Login</h2>
-              <p className="text-center text-gray-500 mb-10 text-sm">Secure access to verification portal</p>
+              <h2 className="text-3xl font-bold text-center text-white mb-2 tracking-tight">Login</h2>
+              <p className="text-center text-gray-300 mb-10 text-sm">Secure access to verification portal</p>
 
               {authError && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm text-center">
@@ -587,7 +564,7 @@ export default function Home() {
 
               <form onSubmit={handleEmailLogin} className="space-y-5">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-200 mb-2">
                     Email address
                   </label>
                   <input
@@ -596,13 +573,13 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+                    className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
                     placeholder="you@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-semibold text-gray-200 mb-2">
                     Password
                   </label>
                   <input
@@ -611,7 +588,7 @@ export default function Home() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-5 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+                    className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white placeholder-gray-400 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -624,7 +601,7 @@ export default function Home() {
                       onChange={(e) => setRememberMe(e.target.checked)}
                       className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/40"
                     />
-                    <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">Stay signed in</span>
+                    <span className="text-sm text-gray-300 group-hover:text-white transition-colors">Stay signed in</span>
                   </label>
                   <a
                     href="#"
@@ -646,10 +623,10 @@ export default function Home() {
 
               <div className="mt-8 relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-100" />
+                  <div className="w-full border-t border-white/10" />
                 </div>
                 <div className="relative flex justify-center text-xs">
-                  <span className="px-4 bg-white text-gray-400 font-bold uppercase tracking-widest">Standard login</span>
+                  <span className="px-4 bg-transparent text-gray-400 font-bold uppercase tracking-widest">Standard login</span>
                 </div>
               </div>
 
@@ -657,7 +634,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm active:scale-[0.98]"
+                  className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all shadow-sm active:scale-[0.98]"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -665,10 +642,10 @@ export default function Home() {
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                   </svg>
-                  <span className="text-sm font-bold text-gray-700">Google</span>
+                  <span className="text-sm font-bold text-gray-200">Google</span>
                 </button>
 
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-400">
                   New administrator? <a href="#" className="font-bold text-primary hover:text-emerald-700 transition-colors uppercase tracking-tight">Request Access</a>
                 </p>
               </div>
