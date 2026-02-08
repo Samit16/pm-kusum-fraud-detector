@@ -1,6 +1,5 @@
 # PM-KUSUM Solar Subsidy Fraud Detection System
 
-> **HackNagpur 2025 | Track: Digital Public Infrastructure (DPI-2)**  
 > Smart fraud detection for government solar pump subsidy schemes
 
 ![Status](https://img.shields.io/badge/status-in%20development-yellow)
@@ -32,7 +31,7 @@ An intelligent CSV-based fraud detection dashboard that flags suspicious applica
 
 ## 🚀 Features
 
-### Base Solution (MVP)
+### Base Solution
 - ✅ **CSV Upload & Parsing** - Bulk upload of subsidy applications
 - ✅ **Duplicate Detection** - Aadhaar, bank account, and phone number cross-checking
 - ✅ **GPS Clustering Analysis** - Identifies suspicious geographic patterns
@@ -140,22 +139,6 @@ Ramesh Kumar,1234,9876543210,SBIN0001234567,26.8467,75.8012,2025-01-15,123/4,5HP
 
 ---
 
-## 🎨 Screenshots
-
-### Upload Interface
-*Clean, intuitive CSV drag-and-drop*
-
-### Dashboard Overview
-*Red/Amber/Green risk categorization with counts*
-
-### GPS Clustering Map
-*Visual identification of suspicious geographic patterns*
-
-### Confidence Scoring (Mutation A)
-*Explainable fraud indicators with percentage confidence*
-
----
-
 ## 🧪 Testing
 
 ### Unit Tests
@@ -203,7 +186,7 @@ npm run demo:fraud-mix     # 30% frauds seeded
 
 ## 📄 License
 
-MIT License - Built for HackNagpur 2025
+MIT License
 
 ---
 
