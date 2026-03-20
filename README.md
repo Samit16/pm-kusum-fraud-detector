@@ -199,13 +199,4 @@ MIT License
 
 ---
 
-## 📞 Contact
-
-For queries during judging:
-- **Team Lead**: [Your Phone/Email]
-- **GitHub**: [Repository Link]
-- **Demo**: [Vercel Deployment URL]
-
----
-
 **Built with ❤️ for India's farmers and renewable energy future**
