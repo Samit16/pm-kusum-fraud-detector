@@ -178,7 +178,7 @@ npm run demo:fraud-mix     # 30% frauds seeded
 
 - **[Samit Bhisikar]** - Backend Lead
 - **[Malhar Kalmegh]** - Pitch and presentation
-- **[Krishanu Chatterjee]** - UI/UX design
+- **[Krishanu Chatterjee]** - Frontend Lead
 
 **Mentor/Guide**: [Kajal Badlani]
 
